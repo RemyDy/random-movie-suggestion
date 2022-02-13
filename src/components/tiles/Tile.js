@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from "../../helpers/fetchdata/axios";
-import css from "./Tile.module.css";
+import styledTile from "./Tile.module.css"
+import styledMovie from "./Movie.module.css"
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Tile({title, fetchUrl, isLargeTile}) {
+function Tile({fetchUrl, isLargeTile, tile}) {
     const [movie, setMovie] = useState([]);
 
     useEffect(() => {
+
         async function fetchData() {
             const requests = await axios.get(fetchUrl)
             const {data: {results: movieArray}} = requests;
@@ -17,19 +19,34 @@ function Tile({title, fetchUrl, isLargeTile}) {
         }
 
         fetchData();
+
     }, [fetchUrl])
 
     console.log(movie);
 
     return (
-        <div className={css.tile}>
-            {title}
-            <div className={css["tile-posters"]}>
-                    <img className={`${css["tile-poster"]} ${isLargeTile && css["tile-posterLarge"]}`}
-                         key={movie.id}
-                         src={`${base_url}${isLargeTile ? movie.poster_path : movie.backdrop_path}`} alt={movie.name}/>
-            </div>
-        </div>
+        <>
+            {
+                {
+                    isMovie: <div className={styledTile.tile}>
+                        <div className={styledMovie["movie-contents"]}>
+                            <h3 className={styledMovie.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</h3>
+                            <div className={styledMovie["movie-posters"]}>
+                                <img
+                                    className={`${styledMovie["movie-poster"]} ${isLargeTile && styledMovie["movie-posterLarge"]}`}
+                                    key={movie.id}
+                                    src={`${base_url}${isLargeTile ? movie.backdrop_path : movie.poster_path}`}
+                                    alt={movie.name}
+                                />
+                            </div>
+                            <h4 className={styledMovie["movie-description"]}>{movie?.overview}</h4>
+                        </div>
+                    </div>,
+                    isLogin:
+                        <div>Joepie</div>
+                }[tile]
+            }
+        </>
     )
 }
 

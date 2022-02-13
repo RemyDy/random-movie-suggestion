@@ -1,10 +1,18 @@
 import React from 'react';
+import tmdbRequests from "../../helpers/fetchdata/tmdbRequests";
+import Tile from "../../components/tiles/Tile";
 
-function Home () {
+function Home() {
+
     return (
-        <div className="home">
-            <h2>HomePage</h2>
-        </div>
+        <>
+            <Tile
+                title="Top Rated Movies"
+                fetchUrl={tmdbRequests.fetchTopRated}
+                tile="isMovie"
+                isLargeTile
+            />
+        </>
     );
 }
 

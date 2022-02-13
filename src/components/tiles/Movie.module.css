@@ -1,6 +1,16 @@
+.movie-contents{
+
+}
+
+.title {
+    position: center;
+    /*padding: 2px;*/
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
 
 .movie-posters {
-    display: flex;
+    /*display: flex;*/
     padding: 20px;
     overflow-y: hidden;
     overflow-x: scroll;
@@ -31,5 +41,11 @@
 }
 
 .movie-description {
+    object-fit: contain;
+    width: 100%;
+}
+
+.movie-button{
 
 }
+

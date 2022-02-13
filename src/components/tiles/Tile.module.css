@@ -1,34 +1,8 @@
 .tile {
-    color: white;
-}
-
-.tile-posters {
-    display: flex;
+    /*position: relative;*/
+    align: center center;
+    width: 25%;
+    max-height: 50%;
     padding: 20px;
-    overflow-y: hidden;
-    overflow-x: scroll;
-}
-
-.tile-posters::-webkit-scrollbar {
-    display: none;
-}
-
-.tile-poster {
-    object-fit: contain;
-    width: 100%;
-    max-height: 100px;
-    margin-right: 10px;
-    transition: transform 400ms;
-}
-
-.tile-poster:hover {
-    transform: scale(1.08);
-}
-
-.tile-posterLarge {
-    max-height: 250px;
-}
-
-.tile-posterLarge:hover {
-    transform: scale(1.09);
+    border: 5px solid #f2f2f2;;
 }
