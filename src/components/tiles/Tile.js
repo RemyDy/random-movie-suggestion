@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "../../helpers/fetchdata/axios";
-import styledTile from "./Tile.module.css"
-import styledMovie from "./Movie.module.css"
+import styled from "./Tile.module.css"
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -28,18 +27,18 @@ function Tile({fetchUrl, isLargeTile, tile}) {
         <>
             {
                 {
-                    isMovie: <div className={styledTile.tile}>
-                        <div className={styledMovie["movie-contents"]}>
-                            <h3 className={styledMovie.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</h3>
-                            <div className={styledMovie["movie-posters"]}>
+                    isMovie: <div className={styled.tile}>
+                        <div className={styled["movie-contents"]}>
+                            <h3 className={styled.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</h3>
+                            <div className={styled["movie-posters"]}>
                                 <img
-                                    className={`${styledMovie["movie-poster"]} ${isLargeTile && styledMovie["movie-posterLarge"]}`}
+                                    className={`${styled["movie-poster"]} ${isLargeTile && styled["movie-posterLarge"]}`}
                                     key={movie.id}
                                     src={`${base_url}${isLargeTile ? movie.backdrop_path : movie.poster_path}`}
                                     alt={movie.name}
                                 />
                             </div>
-                            <h4 className={styledMovie["movie-description"]}>{movie?.overview}</h4>
+                            <h4 className={styled["movie-description"]}>{movie?.overview}</h4>
                         </div>
                     </div>,
                     isLogin:

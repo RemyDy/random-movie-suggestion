@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import styled from "./Navbar.module.css"
-
 import logo from "../../helpers/assets/Logo RmS zwart-wit.png"
 
 function Navbar() {
@@ -12,7 +11,7 @@ function Navbar() {
                     src={logo}
                     alt="logo"
                 />
-                <h1>Random Movie Suggester</h1>
+                <h1 className={styled.title}>Random Movie Suggester</h1>
                 <div className={styled.links}>
                     <Link to="/">Home</Link>
                     <Link to="/login">Login</Link>
