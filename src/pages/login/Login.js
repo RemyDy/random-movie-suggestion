@@ -1,51 +1,81 @@
-import React from 'react';
-import Tile from "../../components/tiles/Tile"
+import React, {useContext} from 'react';
 import {useForm} from "react-hook-form";
+import styled from "./Login.module.css"
+import {AuthContext} from "../../context/Context";
 
 
-
-// stap 1 maak inputvelden voor login
-// stap 2 maak logica voor inloggen met hardcode
-// stap 3 zet validatieregels
+// [x] stap 1 maak inputvelden voor login
+// [x] stap 2 maak logica voor inloggen met hardcode
+// [x] stap 3 zet validatieregels
 // stap 4 zet deze in component
 // stap 4 zet in context (maak context aan als dat nog niet bestaat)
 // stap 5 maak logica dynamisch
 
 // herhaal vanaf stap 3 voor signup
 
-
 function Login() {
-    const {handleSubmit, register} = useForm();
+    const {login} = useContext(AuthContext);
+    const {handleSubmit, formState: {errors}, register} = useForm();
 
-    function onSubmit(data){
+    function onSubmit(data) {
         console.log(data);
+        login();
     }
 
     return (
         <>
             <h1>inloggen</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque neque sed.</p>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={styled.login}
+            >
+                <fieldset>
+                    <legend>Login</legend>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="username">
-                    Username:
-                    <input
-                    type="username"
-                    id="username-field"
-                    {...register("username")}
-                    />
-                </label>
+                    <label htmlFor="username-field">
+                        Username:
+                        <input
+                            className={styled["login-username"]}
+                            type="username"
+                            id="username-field"
+                            {...register("username", {
+                                required: "Gebruikersnaam is verplicht, veld mag niet leeg zijn",
+                                minLength: {
+                                    value: 6,
+                                    message: "Een minimum van 6 karakters is verplicht",
+                                }
+                            })}
+                        />
+                    </label>
+                    {errors.username && <p>{errors.username.message}</p>}
 
+                    <label htmlFor="password-field">
+                        Password:
+                        <input
+                            className={styled["login-password"]}
+                            type="password"
+                            id="password-field"
+                            {...register("password", {
+                                required: "wachtwoord is verplicht, veld mag niet leeg zijn",
+                                minLength: {
+                                    value: 6,
+                                    message: "Een minimum van 6 karakters is verplicht",
+                                },
+                            //     pattern: {
+                            //         value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/g,
+                            //         message: "Kleine letter, hoofdletter, nummer en speciale symbool ( ! @ # $ * ) is verplicht in het wachtwoord"
+                            // }
+                            })}
+                        />
+                    </label>
+                    {errors.password && <p>{errors.password.message}</p>}
+                    <button
+                        type="submit"
+                    >login
+                    </button>
+                </fieldset>
             </form>
-
-
-            <Tile
-                tile="isLogin"
-            />
-
-            <div className="home">
-                <h2>Login</h2>
-            </div>
         </>
     );
 }

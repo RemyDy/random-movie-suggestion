@@ -20,8 +20,6 @@ function Home() {
                     tile="isMovie"
                     fetchUrl={tmdbRequests.fetchTopRated}
                 />
-
-
             </div>
         </>
     );

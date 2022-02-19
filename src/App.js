@@ -8,24 +8,32 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import RMS from "./pages/rms/RMS"
 import Game from "./pages/game/Game"
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import React from "react";
+import {Routes, Route, Navigate, Outlet} from "react-router-dom";
+import React, {useContext} from "react";
+import {AuthContext} from "./context/Context";
 
+function PrivateOutlet() {
+    const {isAuth} = useContext(AuthContext);
+    return isAuth ? <Outlet /> : <Navigate to="/" />
+}
 
 function App() {
+
+
     return (
         <>
             <div className={styled.app}>
-                <BrowserRouter>
-                    <Navbar className={breakpoints}/>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="login" element={<Login/>}/>
-                        <Route path="/login/*" element={<Profile/>}/>
-                        <Route path="/rms" element={<RMS/>}/>
-                        <Route path="/rms/*" element={<Game/>}/>
-                    </Routes>
-                </BrowserRouter>
+                <Navbar className={breakpoints}/>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="login" element={<Login/>}/>
+                    <Route path="private" element={<PrivateOutlet />}>
+                        <Route path="private/profile" element={<Profile/>}/>
+                        <Route path="private/RMS" element={<RMS/>}/>
+                        <Route path="private/Game" element={<Game/>}/>
+                    </Route>
+                </Routes>
+                }
                 <Block/>
                 <div className={styled.footer}>
                     <div>sponsor</div>

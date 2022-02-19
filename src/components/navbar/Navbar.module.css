@@ -34,6 +34,13 @@
     background: none;
 }
 
+.private-links{
+    background: none;
+}
+.public-links{
+    background: none;
+}
+
 .navbar-logo {
     width: 40px;
     object-fit: contain;
