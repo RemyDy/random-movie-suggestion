@@ -1,7 +1,10 @@
 import React from 'react';
 import Tile from "../../components/tiles/Tile"
-import {useForm} from "reac"
+import {useForm} from "react-hook-form";
 
+
+
+// stap 1 maak inputvelden voor login
 // stap 2 maak logica voor inloggen met hardcode
 // stap 3 zet validatieregels
 // stap 4 zet deze in component
@@ -12,12 +15,18 @@ import {useForm} from "reac"
 
 
 function Login() {
+    const {handleSubmit, register} = useForm();
+
+    function onSubmit(data){
+        console.log(data);
+    }
+
     return (
         <>
             <h1>inloggen</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque neque sed.</p>
 
-            <form onSubmit="">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="username">
                     Username:
                     <input
