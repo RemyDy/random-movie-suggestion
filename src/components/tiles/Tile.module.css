@@ -1,0 +1,59 @@
+.tile {
+    width: 250px;
+    max-height: 300px;
+    padding: 50px;
+    border: 5px solid #f2f2f2;;
+}
+
+.movie-contents{
+
+}
+
+.title {
+    position: center;
+    /*padding: 2px;*/
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.movie-posters {
+    /*display: flex;*/
+    padding: 20px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.movie-posters::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-poster {
+    object-fit: contain;
+    width: 100%;
+    max-height: 100px;
+    margin-right: 10px;
+    transition: transform 400ms;
+}
+
+.movie-poster:hover {
+    transform: scale(1.08);
+}
+
+.movie-posterLarge {
+    max-height: 250px;
+}
+
+.movie-posterLarge:hover {
+    transform: scale(1.09);
+}
+
+.movie-description {
+    object-fit: contain;
+    width: 100%;
+}
+
+.movie-button{
+
+}
+
+
