@@ -1,10 +1,15 @@
 import React from 'react';
+import {Outlet} from "react-router-dom";
 
-function RMS () {
+function RMS() {
     return (
-        <div className="home">
-            <h2>RMS</h2>
-        </div>
+        <>
+            <div className="home">
+                <h2>RMS</h2>
+            </div>
+
+            <Outlet/>
+        </>
     );
 }
 

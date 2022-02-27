@@ -1,135 +1,78 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useForm} from "react-hook-form";
 import styled from "./Login.module.css"
 import {AuthContext} from "../../context/Context";
-
-
-// [x] stap 1 maak inputvelden voor login
-// [x] stap 2 maak logica voor inloggen met hardcode
-// [x] stap 3 zet validatieregels
-// stap 4 zet deze in component
-// stap 4 zet in context (maak context aan als dat nog niet bestaat)
-// stap 5 maak logica dynamisch
-
-// herhaal vanaf stap 3 voor signup
+import {Outlet, Link} from "react-router-dom";
+import validations from "../../helpers/validations";
+import {noviRequests} from "../../helpers/fetchdata/requests";
+import {baseNovi} from "../../helpers/fetchdata/axios";
 
 function Login() {
     const {login} = useContext(AuthContext);
     const {handleSubmit, formState: {errors}, register} = useForm();
+    const [error, toggleError] = useState(false);
 
-    function onSubmit(data) {
+    async function onSubmit(data) {
+        toggleError(false);
+
+        try {
+            const result = await baseNovi.post(noviRequests.post.signin, {
+                username: data.username,
+                password: data.password,
+            });
+            console.log(result);
+            login();
+        } catch (e) {
+            console.error(e.response);
+            toggleError(true);
+        }
         console.log(data);
-        login();
     }
 
     return (
         <>
             <h1>inloggen</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque neque sed.</p>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className={styled.login}
+                className={styled.form}
             >
-                <fieldset>
-                    <legend>Login</legend>
-
+                <section>
                     <label htmlFor="username-field">
-                        Username:
+                        Username
                         <input
-                            className={styled["login-username"]}
-                            type="username"
+                            type="text"
                             id="username-field"
-                            {...register("username", {
-                                required: "Gebruikersnaam is verplicht, veld mag niet leeg zijn",
-                                minLength: {
-                                    value: 6,
-                                    message: "Een minimum van 6 karakters is verplicht",
-                                }
-                            })}
+                            {...register("username", validations.username)}
                         />
                     </label>
-                    {errors.username && <p>{errors.username.message}</p>}
+                    <p>{errors?.username && errors.username?.message}</p>
+                </section>
 
+                <section>
                     <label htmlFor="password-field">
-                        Password:
+                        Password
                         <input
-                            className={styled["login-password"]}
                             type="password"
                             id="password-field"
-                            {...register("password", {
-                                required: "wachtwoord is verplicht, veld mag niet leeg zijn",
-                                minLength: {
-                                    value: 6,
-                                    message: "Een minimum van 6 karakters is verplicht",
-                                },
-                            //     pattern: {
-                            //         value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/g,
-                            //         message: "Kleine letter, hoofdletter, nummer en speciale symbool ( ! @ # $ * ) is verplicht in het wachtwoord"
-                            // }
-                            })}
+                            {...register("password", validations.password)}
                         />
                     </label>
-                    {errors.password && <p>{errors.password.message}</p>}
-                    <button
-                        type="submit"
-                    >login
-                    </button>
-                </fieldset>
+                    <p>{errors.password?.message}</p>
+                </section>
+
+                {error && <p>Combinatie van e-mailadres en wachtwoord is onjuist</p>}
+                <button type="submit">login</button>
+
             </form>
+
+            <p>Heb je nog geen account?
+                <Link to="/registration"> Registreer</Link> je dan eerst.
+            </p>
+
+            <Outlet/>
         </>
     );
 }
 
 export default Login;
 
-
-// stap 1 maak inputvelden voor login
-// "username": "piet",
-//     "email" : "piet@novi.nl",
-//     "password" : "123456",
-//     "role": ["user"]
-// Let hierbij op de volgende vereisten:
-//
-//     Het emailadres moet daadwerkelijk een @ bevatten
-// Het wachtwoord en gebruikersnaam moeten minimaal 6 tekens bevatten
-// Wanneer je een gebruiker probeert te registreren met een username die al bestaat, krijg je een foutcode.
-// De details over deze foutmelding vindt je in e.response.
-
-// optionele velden
-// Het is toegestaan om een string mee te sturen onder de info-key, zodat je hier additionele informatie over de gebruiker in kunt opslaan:
-// {
-//    "username": "piet",
-//    "email" : "piet@novi.nl",
-//    "password" : "123456",
-//    "info": "Ik woon in Utrecht",
-//    "role": ["user"]
-
-// rollen
-// Wanneer je een gebruiker met admin-rol wil aanmaken, verander je de rol als volgt: "role": ["admin"]. Het is ook mogelijk een gebruiker aan te maken met twee rollen:
-//
-// {
-//     "role": ["user", "admin"]
-// }
-
-// 2. Inloggen
-// POST /api/auth/signin
-//
-// Het inloggen van een bestaande gebruiker kan alleen als deze al geregistreerd is. Inloggen vereist de volgende informatie:
-//
-// {
-//     "username": "user",
-//     "password" : "123456",
-// }
-// De response bevat een authorisatie-token (JWT) en alle gebruikersinformatie. Onderstaand voorbeeld laat de repsonse zien na het inloggen van een gebruiker met een admin-rol:
-//
-// {
-//     "id": 6,
-//     "username": "mod3",
-//     "email": "mod3@novi.nl",
-//     "roles": [
-//     "ROLE_USER",
-//     "ROLE_MODERATOR"
-// ],
-//     "accessToken": "eyJhJIUzUxMiJ9.eyJzdWICJleQ0OTR9.AgP4vCsgw5TMj_AQAS-J8doHqADTA",
-//     "tokenType": "Bearer"
-// }

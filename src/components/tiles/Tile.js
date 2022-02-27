@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axios from "../../helpers/fetchdata/axios";
+import {baseTMDB as axios} from "../../helpers/fetchdata/axios";
 import styled from "./Tile.module.css"
 
 const base_url = "https://image.tmdb.org/t/p/original/";

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {AuthContext} from "../../context/Context";
 import styled from "./Navbar.module.css"
 import logo from "../../helpers/assets/Logo RmS zwart-wit.png"
@@ -8,7 +8,6 @@ function Navbar() {
     const {logout, isAuth} = useContext(AuthContext);
 
     return (
-        <>
             <nav className={styled.navbar}>
                 <img
                     className={styled["navbar-logo"]}
@@ -16,25 +15,22 @@ function Navbar() {
                     alt="logo"
                 />
                 <h1 className={styled.title}>Random Movie Suggester</h1>
-                <div className={styled.links}>
                     {isAuth ?
                         <div className={styled["private-links"]}>
-                            <Link to="private/profile">Profile</Link>
-                            <Link to="private/RMS">RMS</Link>
-                            <Link to="private/Game">Game</Link>
-                            <Link
+                            <NavLink to="profile" end>Profile</NavLink>
+                            <NavLink to="RMS" end>RMS</NavLink>
+                            <NavLink to="Game" end>Game</NavLink>
+                            <NavLink
                                 onClick={logout}
-                                to="/">Logout</Link>
+                                to="/" end>Logout</NavLink>
                         </div>
                         :
                         <div className={styled["public-links"]}>
-                            <Link to="/">Home</Link>
-                            <Link to="login">Login</Link>
+                            <NavLink to="/" end>Home</NavLink>
+                            <NavLink to="login" end>Login</NavLink>
                         </div>
                     }
-                </div>
-            </nav>
-        </>
+                </nav>
     );
 }
 

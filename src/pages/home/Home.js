@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from "./Home.module.css"
-import tmdbRequests from "../../helpers/fetchdata/tmdbRequests";
+import {tmdbRequests} from "../../helpers/fetchdata/requests";
 import Tile from "../../components/tiles/Tile";
+import {Outlet} from "react-router-dom";
 
 function Home() {
 
@@ -21,6 +22,8 @@ function Home() {
                     fetchUrl={tmdbRequests.fetchTopRated}
                 />
             </div>
+
+             <Outlet />
         </>
     );
 }

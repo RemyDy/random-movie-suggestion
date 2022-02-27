@@ -14,7 +14,11 @@
     outline: white;
 }
 
-button{
+button {
     margin: 10px;
     max-width: 100px;
+}
+
+.form {
+
 }

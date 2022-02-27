@@ -1,6 +1,6 @@
 const myKey = process.env.REACT_APP_API_KEY;
 
-const tmdbRequests = {
+export const tmdbRequests = {
     fetchTrending: `/trending/all/week?api_key=${myKey}&language=en-US&include_adult=false`,
     fetchTopRated: `/movie/top_rated?api_key=${myKey}&language=en-US&include_adult=false`,
     fetchActionMovies: `/discover/movie/?api_key=${myKey}&language=en-US&include_adult=false&with_genres=28`,
@@ -10,4 +10,24 @@ const tmdbRequests = {
     fetchDocumentaries: `/discover/movie/?api_key=${myKey}&language=en-US&include_adult=false&with_genres=99`,
 }
 
-export default tmdbRequests;
+export const noviRequests = {
+    post: {
+        signup: `/api/auth/signup`,
+        signin: `/api/auth/signin`,
+        photo: `/api/user/image`,
+    },
+    get: {
+        test: {
+            endpoint: `/api/test/all`,
+            usersecured: `/api/test/user`,
+            adminsecured: `/api/test/admin`,
+        },
+        signin: {
+            user: `/api/user`,
+            allusers: `/api/admin/all`,
+        },
+    },
+    put: {
+        customize: `/api/user`,
+    }
+}
