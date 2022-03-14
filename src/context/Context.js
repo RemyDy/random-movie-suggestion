@@ -1,33 +1,110 @@
-import React, {createContext, useState} from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+// noinspection JSIgnoredPromiseFromCall,JSCheckFunctionSignatures
+
+import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import {NoviBackend, requests} from "../helpers/fetchdata/novi";
+import {presentTimeInUnix} from "../helpers/presentTimeInUnix";
 
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
+    const [isAuth, toggleIsAuth] = useState({
+        isAuth: false,
+        user: null,
+        status: "pending",
+    });
     const navigate = useNavigate();
-    const [isAuth, toggleIsAuth] = useState(false);
 
-    function login() {
-        console.log('Gebruiker is ingelogd!');
-        toggleIsAuth(true);
-        navigate("/profile")
+    useEffect(() => {
+            const token = localStorage.getItem("token");
+
+            if (token) {
+                const decodedJWT = jwt_decode(token);
+                if (decodedJWT.exp - presentTimeInUnix > 0) {
+                    console.log("token is valid");
+                    fetchUserData(decodedJWT.sub, token);
+                } else {
+                    console.log("token is NOT valid");
+                    logout();
+                }
+            } else {
+                toggleIsAuth({
+                    isAuth: false,
+                    user: null,
+                    status: "done",
+                });
+            }
+        },
+        []);
+
+    function login(JWT) {
+        if (JWT !== undefined) {
+            localStorage.setItem("token", JWT)
+        }
+        const decodedJWT = jwt_decode(JWT);
+        fetchUserData(decodedJWT.sub, JWT, "/profile");
     }
 
     function logout() {
-            console.log('Gebruiker is uitgelogd!');
-            toggleIsAuth(false);
-            navigate("/");
+        localStorage.clear();
+        toggleIsAuth({
+            isAuth: false,
+            user: null,
+            status: "done",
+        });
+        console.log('Gebruiker is uitgelogd!');
+        navigate("/");
+    }
+
+    async function fetchUserData(id, token, redirectUrl) {
+
+        try {
+            const result = await NoviBackend.get(requests.get.logged.user, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (result.status === 200) {
+                toggleIsAuth({
+                    ...isAuth,
+                    isAuth: true,
+                    user: {
+                        id: result.data?.id,
+                        username: result.data?.username,
+                        email: result.data?.email,
+                    },
+                    status: "done",
+                });
+
+                if (redirectUrl) {
+                    navigate(redirectUrl);
+                }
+            }
+        } catch (e) {
+            console.error(e.response);
+            logout();
+            // toggleIsAuth({
+            //     isAuth: false,
+            //     user: null,
+            //     status: "done",
+            // });
+        }
     }
 
     const contextData = {
-        isAuth: isAuth,
+        isAuth: isAuth.isAuth,
+        user: isAuth.user,
         login: login,
         logout: logout,
     };
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {isAuth.status === "done" ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );
 }

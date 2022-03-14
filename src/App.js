@@ -1,6 +1,5 @@
 import styled from './App.module.css';
 import breakpoints from "./helpers/breakpoints";
-
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -22,9 +21,10 @@ function App() {
                 <Routes>
                     {isAuth ?
                         <>
-                            <Route path="/profile/*" element={<Profile/>}/>
+                            <Route path="/profile" element={<Profile/>}/>
                             <Route path="/rms/*" element={<RMS/>}/>
                             <Route path="/game/*" element={<Game/>}/>
+                            <Route path="/" element={<Home/>}/>
                         </>
                         :
                         <>

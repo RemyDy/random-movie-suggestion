@@ -1,32 +1,63 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import styled from "./Login.module.css"
 import {AuthContext} from "../../context/Context";
 import {Outlet, Link} from "react-router-dom";
-import validations from "../../helpers/validations";
-import {noviRequests} from "../../helpers/fetchdata/requests";
-import {baseNovi} from "../../helpers/fetchdata/axios";
+import validations from "../../helpers/fetchdata/validations";
+import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
+import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 
 function Login() {
+
     const {login} = useContext(AuthContext);
-    const {handleSubmit, formState: {errors}, register} = useForm();
     const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const [firstRender, toggleFirstRender] = useState(false);
+    const {handleSubmit, register, formState: {errors}} = useForm(
+    //     {
+    //     defaultValues: {
+    //         username: "testtest",
+    //         password: "Test12345",
+    //     }
+    // }
+    );
+
+    if (firstRender === false) {
+        console.log(firstRender)
+        toggleFirstRender(true);
+    }
+
+    useEffect(() => {
+        return function cleanup() {
+            axiosCancelToken.cancel(
+                "Request canceled!"
+            );
+        }
+    }, []);
 
     async function onSubmit(data) {
         toggleError(false);
+        toggleLoading(true);
 
         try {
-            const result = await baseNovi.post(noviRequests.post.signin, {
+            console.log(data);
+
+            const result = await NoviBackend.post(requests.post.signin, {
                 username: data.username,
                 password: data.password,
+            }, {
+                cancelToken: axiosCancelToken.token
             });
             console.log(result);
-            login();
+            if (result.status === 200) {
+                login(result.data?.accessToken)
+            }
+
         } catch (e) {
             console.error(e.response);
             toggleError(true);
         }
-        console.log(data);
+        toggleLoading(false);
     }
 
     return (
@@ -37,37 +68,27 @@ function Login() {
                 className={styled.form}
             >
                 <section>
-                    <label htmlFor="username-field">
-                        Username
-                        <input
-                            type="text"
-                            id="username-field"
-                            {...register("username", validations.username)}
-                        />
+                    <label htmlFor="username-field">Username
+                        <input type="text"
+                               id="username-field" {...register("username", validations.username)} />
                     </label>
                     <p>{errors?.username && errors.username?.message}</p>
                 </section>
 
                 <section>
-                    <label htmlFor="password-field">
-                        Password
-                        <input
-                            type="password"
-                            id="password-field"
-                            {...register("password", validations.password)}
-                        />
+                    <label htmlFor="password-field">Password
+                        <input type="password"
+                               id="password-field" {...register("password", validations.password)} />
                     </label>
-                    <p>{errors.password?.message}</p>
+                    <p>{errors?.password && errors.password?.message}</p>
                 </section>
 
-                {error && <p>Combinatie van e-mailadres en wachtwoord is onjuist</p>}
+                <p hidden={loading === false}>Loading... please wait</p>
+                {error && <p>Reactie van server: combinatie van gebruikersnaam en wachtwoord is onjuist</p>}
                 <button type="submit">login</button>
-
             </form>
 
-            <p>Heb je nog geen account?
-                <Link to="/registration"> Registreer</Link> je dan eerst.
-            </p>
+            <p>Heb je nog geen account? <Link to="/registration"> Registreer</Link> je dan eerst.</p>
 
             <Outlet/>
         </>

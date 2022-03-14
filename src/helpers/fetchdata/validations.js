@@ -1,4 +1,4 @@
-const loginOptions = {
+const validations = {
     username: {
         required: "Name is required",
         minLength: {
@@ -24,10 +24,6 @@ const loginOptions = {
             }
         }
     },
-    info: {},
-    role: {
-
-    }
 };
 
-export default loginOptions;
+export default validations;
