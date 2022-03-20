@@ -1,28 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "./Home.module.css"
-import tmdbRequests from "../../helpers/fetchdata/tmdbRequests";
-import Tile from "../../components/tiles/Tile";
+import {requests} from "../../helpers/fetchdata/tmdb"
+import Data from "../../components/data/Data";
+import {Outlet} from "react-router-dom";
+import Button from "../../components/buttons/Button";
 
 function Home() {
 
+
     return (
         <>
-            <div className={styled["container-tiles"]}>
-                <Tile
-                    className={styled.tile1}
-                    title="Top Rated Movies"
-                    fetchUrl={tmdbRequests.fetchTopRated}
-                    tile="isMovie"
-                    isLargeTile
-                />
-                <Tile
-                    className={styled.tile}
-                    tile="isMovie"
-                    fetchUrl={tmdbRequests.fetchTopRated}
-                />
+            <article>
+                    <section>
+                        <Data
+                            title="Top Trending Movies"
+                            fetchUrl={requests.trending}
+                            endpoint="rowMovies"
+                        />
+                    </section>
+            </article>
 
-
-            </div>
+            <Outlet/>
         </>
     );
 }

@@ -1,96 +1,97 @@
-import React from 'react';
-import Tile from "../../components/tiles/Tile"
-import {useForm} from "reac"
-
-// stap 2 maak logica voor inloggen met hardcode
-// stap 3 zet validatieregels
-// stap 4 zet deze in component
-// stap 4 zet in context (maak context aan als dat nog niet bestaat)
-// stap 5 maak logica dynamisch
-
-// herhaal vanaf stap 3 voor signup
-
+import React, {useContext, useEffect, useState} from 'react';
+import {useForm} from "react-hook-form";
+import styled from "./Login.module.css"
+import {AuthContext} from "../../context/Context";
+import {Outlet, Link} from "react-router-dom";
+import validations from "../../helpers/fetchdata/validations";
+import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
+import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
+import logo_loading from "../../helpers/assets/Animatie loading.gif";
 
 function Login() {
+    const {login} = useContext(AuthContext);
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const {handleSubmit, register, formState: {errors}} = useForm(
+        {
+            defaultValues: {
+                username: "",
+                password: "",
+            }
+        });
+
+    useEffect(() => {
+        return function cleanup() {
+            axiosCancelToken.cancel(
+                "Request canceled!"
+            );
+        }
+    }, []);
+
+    async function onSubmit(data) {
+        toggleError(false);
+        toggleLoading(true);
+
+        try {
+            const result = await NoviBackend.post(requests.post.signin, {
+                username: data.username,
+                password: data.password,
+            }, {
+                cancelToken: axiosCancelToken.token
+            });
+            if (result.status === 200) {
+                login(result.data?.accessToken)
+            }
+        } catch (e) {
+            console.error(e.response);
+            toggleError(true);
+        }
+        toggleLoading(false);
+    }
+
     return (
         <>
             <h1>inloggen</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque neque sed.</p>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={styled.form}
+            >
+                <section>
+                    <label htmlFor="username-field">Username
+                        <input type="text"
+                               id="username-field" {...register("username", validations.username)} />
+                    </label>
+                    <p>{errors?.username && errors.username?.message}</p>
+                </section>
 
-            <form onSubmit="">
-                <label htmlFor="username">
-                    Username:
-                    <input
-                    type="username"
-                    id="username-field"
-                    {...register("username")}
-                    />
-                </label>
-
+                <section>
+                    <label htmlFor="password-field">Password
+                        <input type="password"
+                               id="password-field" {...register("password", validations.password)} />
+                    </label>
+                    <p>{errors?.password && errors.password?.message}</p>
+                </section>
+                <button type="submit">login</button>
             </form>
 
+            {/*section messages (errors and loading messages, but not input-validation-messages)*/}
+            <section>
+                <div hidden={loading === false}>
+                    <p hidden={loading === false}>Loading... please wait...</p>
+                    < img src={logo_loading} alt="logo-loading" width="75px"/>
+                </div>
+                {
+                    error &&
+                    <p> Invalid username and/or password. Press F5 and try again, or <Link
+                        to="/registration">register</Link> first.</p>
+                }
+                <p hidden={error || loading}>Don't have an account yet ?<Link to="/registration"> Register</Link> first.</p>
+            </section>
 
-            <Tile
-                tile="isLogin"
-            />
-
-            <div className="home">
-                <h2>Login</h2>
-            </div>
+            <Outlet/>
         </>
     );
 }
 
 export default Login;
 
-
-// stap 1 maak inputvelden voor login
-// "username": "piet",
-//     "email" : "piet@novi.nl",
-//     "password" : "123456",
-//     "role": ["user"]
-// Let hierbij op de volgende vereisten:
-//
-//     Het emailadres moet daadwerkelijk een @ bevatten
-// Het wachtwoord en gebruikersnaam moeten minimaal 6 tekens bevatten
-// Wanneer je een gebruiker probeert te registreren met een username die al bestaat, krijg je een foutcode.
-// De details over deze foutmelding vindt je in e.response.
-
-// optionele velden
-// Het is toegestaan om een string mee te sturen onder de info-key, zodat je hier additionele informatie over de gebruiker in kunt opslaan:
-// {
-//    "username": "piet",
-//    "email" : "piet@novi.nl",
-//    "password" : "123456",
-//    "info": "Ik woon in Utrecht",
-//    "role": ["user"]
-
-// rollen
-// Wanneer je een gebruiker met admin-rol wil aanmaken, verander je de rol als volgt: "role": ["admin"]. Het is ook mogelijk een gebruiker aan te maken met twee rollen:
-//
-// {
-//     "role": ["user", "admin"]
-// }
-
-// 2. Inloggen
-// POST /api/auth/signin
-//
-// Het inloggen van een bestaande gebruiker kan alleen als deze al geregistreerd is. Inloggen vereist de volgende informatie:
-//
-// {
-//     "username": "user",
-//     "password" : "123456",
-// }
-// De response bevat een authorisatie-token (JWT) en alle gebruikersinformatie. Onderstaand voorbeeld laat de repsonse zien na het inloggen van een gebruiker met een admin-rol:
-//
-// {
-//     "id": 6,
-//     "username": "mod3",
-//     "email": "mod3@novi.nl",
-//     "roles": [
-//     "ROLE_USER",
-//     "ROLE_MODERATOR"
-// ],
-//     "accessToken": "eyJhJIUzUxMiJ9.eyJzdWICJleQ0OTR9.AgP4vCsgw5TMj_AQAS-J8doHqADTA",
-//     "tokenType": "Bearer"
-// }
