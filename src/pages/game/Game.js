@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Outlet} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import Movie from "../../components/movie/Movie";
+import Data from "../../components/data/Data";
 import {myKey, requests} from "../../helpers/fetchdata/tmdb";
 // import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import {tmdbBackend} from "../../helpers/fetchdata/tmdb";
@@ -85,8 +85,8 @@ function Game() {
                 <>
                     <p>test</p>
 
-                    {/*<Movie*/}
-                    {/*    fetchUrl={requests.search.movie}*/}
+                    {/*<Data*/}
+                    {/*    fetchUrl={requests.search.data}*/}
                     {/*    endpoint="isMovie"*/}
                     {/*/>*/}
                 </>

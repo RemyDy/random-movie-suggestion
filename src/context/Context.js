@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // noinspection JSIgnoredPromiseFromCall,JSCheckFunctionSignatures
 
+import styled from "./Context.module.css"
 import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import {NoviBackend, requests} from "../helpers/fetchdata/novi";
-import {presentTimeInUnix} from "../helpers/presentTimeInUnix";
+import animatie_loading from "../../src/helpers/assets/Animatie loading.gif"
+import isTokenValid from "../helpers/isTokenValid";
 
 export const AuthContext = createContext({});
 
@@ -21,15 +23,22 @@ function AuthContextProvider({children}) {
             const token = localStorage.getItem("token");
 
             if (token) {
+                // during testing and production enable this:
                 const decodedJWT = jwt_decode(token);
-                if (decodedJWT.exp - presentTimeInUnix > 0) {
-                    console.log("token is valid");
-                    fetchUserData(decodedJWT.sub, token);
-                } else {
-                    console.log("token is NOT valid");
-                    logout();
-                }
-            } else {
+                fetchUserData(decodedJWT.sub, token);
+
+                // during testing and production disable this:
+                // if (token && isTokenValid(token)) {
+                //     const decodedJWT = jwt_decode(token);
+                //     console.log("token is valid");
+                //     fetchUserData(decodedJWT.sub, token);
+                // } else if (token && !isTokenValid(token)) {
+                //     console.log("token is not valid")
+                //     localStorage.clear();
+
+            }
+            // during testing and production disable this:
+            else {
                 toggleIsAuth({
                     isAuth: false,
                     user: null,
@@ -87,11 +96,6 @@ function AuthContextProvider({children}) {
         } catch (e) {
             console.error(e.response);
             logout();
-            // toggleIsAuth({
-            //     isAuth: false,
-            //     user: null,
-            //     status: "done",
-            // });
         }
     }
 
@@ -104,10 +108,10 @@ function AuthContextProvider({children}) {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {isAuth.status === "done" ? children : <p>Loading...</p>}
+            {isAuth.status === "done" ? children : <><img className={styled.loading} src={animatie_loading}
+                                                          alt="animatie_loading"/><p>Loading...</p></>}
         </AuthContext.Provider>
     );
 }
-
 
 export default AuthContextProvider;

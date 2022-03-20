@@ -7,14 +7,15 @@ import styled from "./Registration.module.css"
 import validations from "../../helpers/fetchdata/validations";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
+import logo_loading from "../../helpers/assets/Animatie loading.gif"
 
 function Registration() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [serverIsUp, toggleServerIsUp] = useState(true);
+    const [serverResponse, setServerResponse] = useState(null);
     const navigate = useNavigate();
     const admin = process.env.REACT_APP_ADMIN_PASSWORD;
-    const {register, handleSubmit, watch, setValue, formState: {errors},} = useForm();
+    const {register, handleSubmit, watch, setValue, formState: {errors}} = useForm();
 
     const watchPassword = watch("password");
     useEffect(() => {
@@ -31,29 +32,15 @@ function Registration() {
         }
     }, []);
 
-    async function testBackendAtFirstRender() {
-        toggleServerIsUp(false);
-
-        try {
-            const result = await NoviBackend.get(requests.get.test.endpoint, {
-                cancelToken: axiosCancelToken.token
-            });
-            console.log(result.status)
-            if (result.status === 200) {
-                toggleServerIsUp(true);
-                console.log("result backend : " + result);
-            }
-        } catch (e) {
-            console.error(e.response)
-        }
-    }
-
     async function onSubmit(data) {
         toggleError(false);
         toggleLoading(true);
 
         try {
             console.log(data);
+            // comment out this axios await if you want to test all endpoints and wake the server
+            // const result = await NoviBackend.get(requests.get.test.endpoint);
+
             const result = await NoviBackend.post(requests.post.signup, {
                     username: data.username,
                     email: data.email,
@@ -79,10 +66,6 @@ function Registration() {
 
     return (
         <>
-            <button onClick={testBackendAtFirstRender}>Make connection with BackEnd</button>
-            <p hidden={serverIsUp === true} className={styled["server-down"]}>Making connection to server, a moment
-                please</p>
-
             <h1>Register</h1>
             <form className={styled.form} onSubmit={handleSubmit(onSubmit)}>
 
@@ -108,7 +91,6 @@ function Registration() {
                     {errors?.password && errors?.password.message}
                 </section>
 
-                {error && <p className={styled.error}>Dit account bestaat al. Probeer een ander e-mailadres</p>}
                 <section>
                     <label htmlFor="role-field">
                         <input id="role-field" value={["user"]} hidden="hidden" {...register("role")} />
@@ -118,15 +100,22 @@ function Registration() {
                 <button type={"submit"} disabled={loading}>Registreer</button>
             </form>
 
-            <p hidden={loading === false}>Loading..., making connection with server, please wait...</p>
-            <p>Heb je al een account?s
-                Je kunt je <Link to="/login">hier</Link> inloggen.
-            </p>
+            {/*section messages (errors and loading messages, but not input-validation-messages)*/}
+            <section>
+                <div hidden={loading === false}>
+                    <p hidden={loading === false}>Loading... please wait...</p>
+                    < img src={logo_loading} alt="logo-loading" width="75px"/>
+                </div>
+                {error &&
+                    <p className={styled.error}>Account already exist, Press F5 to try again with a different e-mail
+                        address, or go to <Link to="/login">Login</Link></p>}
+            </section>
+
+            <p hidden={error || loading}>Do you already have an account? Go to <Link to="/login">Login</Link></p>
 
             <Outlet/>
         </>
     )
-
 }
 
 export default Registration;

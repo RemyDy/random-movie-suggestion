@@ -24,6 +24,12 @@ const validations = {
             }
         }
     },
+    person_or_movie: {
+        pattern: {
+            value: /(\w+)\s\+?(\+\w+)?/gm,
+            message: "not valid, kindly add a + sign between the words",
+        }
+    }
 };
 
 export default validations;

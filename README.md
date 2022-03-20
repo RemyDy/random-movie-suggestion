@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Beschrijving van de applicatie
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Random Movie Suggester (RMS) biedt je de mogelijkheid om random film suggesties aangereikt te krijgen voor meer kijkplezier.
+Op de Home pagina kan je met een enkele klik op de knop een rij met films te zien krijgen die nu in bioscopen
+te zien zijn. 
 
-## Available Scripts
+Wil je meer gericht zoeken, zoals op genre? 
+Log dan via de app in op de Novi backend en begeef je naar de private pagina's.
 
-In the project directory, you can run:
+## Applicatie starten
 
-### `npm start`
+Voordat je de applicatie kan gebruiken dien je deze eerst te clonen naar jouw lokale machine.
+Is het clonen afgerond? installeer je eerst de benodigde `node_modules` door de volgende commando's in de terminal te runnen:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+npm install
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Wanneer dit klaar is, dien je de volgende dependencies te installeren:
 
-### `npm test`
+```
+npm install axios
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install jwt-decode
+```
 
-### `npm run build`
+```
+npm install react-hook-form
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install react-router-dom
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm install styled-components
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Wanner alle benodigde dependencies zijn geinstalleerd kun je de applicatie starten met behulp van:
 
-### `npm run eject`
+```
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Of gebruik de IDE knop (npm start). Open [http://localhost:3000](http://localhost:3000/) om de pagina in de browser
+te bekijken. Elke keer als je een bestand opslaat, zullen de wijzigingen te zien zijn op de webpagina.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Pagina's
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+De applicatie heeft op dit moment zes pagina's.
 
-## Learn More
+Deze drie zijn bereikbaar zonder in te loggen:
+1. Home Pagina (`/`)
+2. Sign in (login) Pagina (`/login`)
+3. Sign up (registratie) Pagina (`/registration`)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Deze drie zijn alleen bereikbaar na ingelogd te zijn op de Novi Backend:
+4. Profile Pagina (`/profile`)
+5. Game Pagina (`/game`)
+6. RMS (Random Movie Suggester) Pagina (`/rms`)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Registreren
 
-### Code Splitting
+Als je de beveiligde pagina's wil bekijken dien je eerst jezelf te registeren.
+Begeef je naar de registratie pagina en vul de benodigde gegevens in.
+Gebruikersnaam, wachtwoord en e-mail adres zijn verplicht.
+Bij succesvolle registratie wordt je automatisch doorgelinkt naar de login pagina.
+Het zou kunnen dat het laden lang kan duren de eerste keer, omdat de Novi Backend in slaapstand kan zijn, even geduld.
+Mocht je een melding krijgen dat je al bestaat terwijl je zeker weet dat het niet zo is druk even op de F5 toets.
+Dan wordt het geheugen even opgefrist, daarna zou het moeten werken.
+LET OP: registratie werkt alleen als je minimaal 6 karakters invult bij gebruikersnaam en wachtwoord!
+LET OP: registratie werkt alleen als je e-mail adres voorzien is van een @ teken!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Inloggen
 
-### Analyzing the Bundle Size
+Als je bent doorgelinkt naar de login pagina kan je inloggen door je gebruikersnaam en wachtwoord in te voeren.
+Maak je een typefout dan krijg je een melding dat de combinatie onjuist is, probeer het nog een keer.
+Krijg je een melding, maar weet je zeker dat je de gegevens correct heb ingevoerd? Druk even op de F5 toets.
+Dan wordt het geheugen even opgefrist, daarna zou het moeten werken.
+Bij succesvol ingelogd te zijn wordt je automatisch doorgelinkt naar de profile pagina.
+LET OP: heb je nog geen account aangemaakt dien je eerst jezelf te registreren.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## profile
 
-### Making a Progressive Web App
+Als je bent doorgelinkt naar de profile pagina zul je jouw gebruikersnaam en e-mail adres zien.
+Ook kan je een knop vinden waar je, als je daarop klikt, een "geheime" boodschap van de docent kan opvragen.
+Mocht er niets verschijnen? Druk even op de F5 toets.
+Dan wordt het geheugen even opgefrist, daarna zou het moeten werken. 
+Omdat je op de profile pagina beland bent ben je succesvol ingelogd en kan je ook de andere private pagina's bereiken.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## RMS
 
-### Advanced Configuration
+Wanneer je klikt op de RMS knop in de navbar zul je doorgelinkt worden naar de RMS-pagina.
+RMS is een afkorting dat staat voor Random Movie Suggester.
+Op deze pagina kan je gerichter zoeken op genre, rating, of op persoon.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Game
 
-### Deployment
+Deze pagina is helaas nog onder ontwikkeling.
+Hier zou je een spel kunnen spelen door vragen te beantwoorden die gaan over een film of acteur.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Ophalen van gegevens
 
-### `npm run build` fails to minify
+Een prettige werking is niet alleen afhankelijk van de applicatie die ontwikkeld is, maar ook van de servers waar het
+gebruik van maakt.
+Voor het ophalen van film-gegevens wordt er gebruik gemaakt van de API-server van TMDB.
+Voordat hier gebruik van gemaakt kan worden dient er eerst een Api Key te worden aangevraagd.
+Dat kan gedaan worden door deze pagina te bezoeken: (https://www.themoviedb.org/)
+Ben je docent? Dan heb je mijn Api Key toegezonden gekregen.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Voor meer info over de Novi Backend kan je naar deze pagina surfen:
+(https://github.com/hogeschoolnovi/novi-educational-backend-documentation/blob/main/README.md#0-test)
+
+## Contact
+
+Wil je mij contacteren?
+remco.schut@novi-education.nl

@@ -6,26 +6,19 @@ import {Outlet, Link} from "react-router-dom";
 import validations from "../../helpers/fetchdata/validations";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
+import logo_loading from "../../helpers/assets/Animatie loading.gif";
 
 function Login() {
-
     const {login} = useContext(AuthContext);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [firstRender, toggleFirstRender] = useState(false);
     const {handleSubmit, register, formState: {errors}} = useForm(
-    //     {
-    //     defaultValues: {
-    //         username: "testtest",
-    //         password: "Test12345",
-    //     }
-    // }
-    );
-
-    if (firstRender === false) {
-        console.log(firstRender)
-        toggleFirstRender(true);
-    }
+        {
+            defaultValues: {
+                username: "",
+                password: "",
+            }
+        });
 
     useEffect(() => {
         return function cleanup() {
@@ -40,19 +33,15 @@ function Login() {
         toggleLoading(true);
 
         try {
-            console.log(data);
-
             const result = await NoviBackend.post(requests.post.signin, {
                 username: data.username,
                 password: data.password,
             }, {
                 cancelToken: axiosCancelToken.token
             });
-            console.log(result);
             if (result.status === 200) {
                 login(result.data?.accessToken)
             }
-
         } catch (e) {
             console.error(e.response);
             toggleError(true);
@@ -82,13 +71,22 @@ function Login() {
                     </label>
                     <p>{errors?.password && errors.password?.message}</p>
                 </section>
-
-                <p hidden={loading === false}>Loading... please wait</p>
-                {error && <p>Reactie van server: combinatie van gebruikersnaam en wachtwoord is onjuist</p>}
                 <button type="submit">login</button>
             </form>
 
-            <p>Heb je nog geen account? <Link to="/registration"> Registreer</Link> je dan eerst.</p>
+            {/*section messages (errors and loading messages, but not input-validation-messages)*/}
+            <section>
+                <div hidden={loading === false}>
+                    <p hidden={loading === false}>Loading... please wait...</p>
+                    < img src={logo_loading} alt="logo-loading" width="75px"/>
+                </div>
+                {
+                    error &&
+                    <p> Invalid username and/or password. Press F5 and try again, or <Link
+                        to="/registration">register</Link> first.</p>
+                }
+                <p hidden={error || loading}>Don't have an account yet ?<Link to="/registration"> Register</Link> first.</p>
+            </section>
 
             <Outlet/>
         </>

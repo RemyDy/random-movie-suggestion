@@ -2,18 +2,27 @@ import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
 import {AuthContext} from "../../context/Context";
 import styled from "./Navbar.module.css"
-import logo from "../../helpers/assets/Logo RmS zwart-wit.png"
+import logo_open from "../../helpers/assets/RmS_zwartwit_open.png"
+import logo_closed from "../../helpers/assets/RmS_zwartwit_dicht.png"
 
 function Navbar() {
     const {logout, isAuth} = useContext(AuthContext);
 
     return (
             <nav className={styled.navbar}>
+                {isAuth ?
                 <img
                     className={styled["navbar-logo"]}
-                    src={logo}
-                    alt="logo"
+                    src={logo_open}
+                    alt="logo-open"
                 />
+                    :
+                    <img
+                        className={styled["navbar-logo"]}
+                        src={logo_closed}
+                        alt="logo-closed"
+                    />
+                }
                 <h1 className={styled.title}>Random Movie Suggester</h1>
                     {isAuth ?
                         <div className={styled["private-links"]}>

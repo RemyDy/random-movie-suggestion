@@ -1,23 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "./Home.module.css"
 import {requests} from "../../helpers/fetchdata/tmdb"
-import Movie from "../../components/movie/Movie";
+import Data from "../../components/data/Data";
 import {Outlet} from "react-router-dom";
+import Button from "../../components/buttons/Button";
 
 function Home() {
 
+
     return (
         <>
-            <div className={styled["container-movie"]}>
-                <Movie
-                    // className={styled.tile1}
-                    title="Top Rated Movies"
-                    fetchUrl={requests.trending}
-                    endpoint="isMovie"
-                />
-            </div>
+            <article>
+                    <section>
+                        <Data
+                            title="Top Trending Movies"
+                            fetchUrl={requests.trending}
+                            endpoint="rowMovies"
+                        />
+                    </section>
+            </article>
 
-             <Outlet />
+            <Outlet/>
         </>
     );
 }

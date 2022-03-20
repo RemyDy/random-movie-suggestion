@@ -6,9 +6,8 @@ export const tmdbBackend = axios.create({
     baseURL: "https://api.themoviedb.org/3",
 });
 
-export const baseUrl_images = "https://image.tmdb.org/t/p/original/";
-
 export const requests = {
+    nowPlaying: `/movie/now_playing?api_key=${myKey}&language=en-US&include_adult=false`,
     trending: `/trending/all/week?api_key=${myKey}&language=en-US&include_adult=false`,
     topRated: `/movie/top_rated?api_key=${myKey}&language=en-US&include_adult=false`,
     search: {
@@ -17,7 +16,7 @@ export const requests = {
             //between id & credits needs to be a person's ID number
             credits: `/movie_credits?api_key=${myKey}&language=en-US`,
         },
-        movie: `search/movie?api_key=${myKey}&query=&language=en-US`,
+        movie: `search/movie?api_key=${myKey}&query=`,
     },
     discover: `/discover/movie?api_key=${myKey}&language=en-US`,
     genre: {
@@ -46,5 +45,45 @@ export const requests = {
     ratingFrom70: `&sort_by=popularity.asc&vote_average.gte=7`,
     ratingFrom90: `&sort_by=popularity.asc&vote_average.gte=9`,
     adultNo: `&include_adult=false`,
+}
+
+export const movieImages = {
+    baseURL: "https://image.tmdb.org/t/p/",
+}
+
+export const imageSize = {
+    original: `original`,
+
+    backdrop: {
+        width300: `w300`,
+        width780: `w780`,
+        width1280: `w1280`,
+    },
+    logo: {
+        width45: `w45`,
+        width92: `w92`,
+        width154: `w154`,
+        width185: `w185`,
+        width300: `w300`,
+        width500: `w500`,
+    },
+    poster: {
+        width92: `w92`,
+        width154: `w154`,
+        width185: `w185`,
+        width342: `w342`,
+        width500: `w500`,
+        width780: `w780`,
+    },
+    profile: {
+        width45: `w45`,
+        width185: `w185`,
+        width632: `h632`,
+    },
+    still: {
+        width92: `w92`,
+        width185: `w185`,
+        width300: `w300`,
+    },
 }
 
