@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {Outlet} from "react-router-dom";
 import Data from "../../components/data/Data";
 import {requests} from "../../helpers/fetchdata/tmdb"
@@ -9,7 +9,7 @@ import Button from "../../components/buttons/Button";
 
 function RMS() {
     // const componentRef = useRef();
-    const {register, handleSubmit} = useForm({
+    const {register, handleSubmit, reset} = useForm({
         defaultValues: {
             genre: "",
             rating: "",
@@ -18,33 +18,25 @@ function RMS() {
         }
     });
 
+
+
     const [url, setURL] = useState("");
-    // const [rating, setRating] = useState("");
+    const [rating, setRating] = useState("");
     const [person, setPerson] = useState("")
     const [lookFor, setLookFor] = useState("");
     const [searchType, setSearchType] = useState(0);
     const [movie, setMovie] = useState("");
     const [personID, setPersonID] = useState("");
 
-    // const sendID = (message: int =>{
-    //     setPersonID(message);
-    // })
+    function resetData() {
+        reset({
+            data: ""
+        });
+    }
 
     function handleChange(event) {
         setLookFor(event.target.value)
     }
-
-
-
-
-    // if() !== null || undefined){
-    // const test = this.id_person.current;
-    //     console.log(test);
-    // } else{
-    //     console.log("undefined");
-    // }
-
-    // console.log(id_person);
 
 
     function onSubmit(data) {
@@ -58,37 +50,28 @@ function RMS() {
 
         if (genre && rating && person) {
             setSearchType(1);
-            setURL(genre + rating + person)
         } else if (genre && rating) {
-            console.log("genre en rating");
             setSearchType(2);
             setURL(genre + rating);
         } else if (genre && person) {
-            console.log("genre en person");
-            setSearchType(3);
+            setSearchType(1);
         } else if (genre) {
-            console.log("genre");
             setURL(genre);
-            setSearchType(4);
+            setSearchType(2);
         } else if (rating && person) {
-            console.log("rating en person");
-            setSearchType(5);
+            setSearchType(1);
         } else if (rating) {
-            console.log("rating");
             setURL(rating);
-            setSearchType(6)
+            setSearchType(2)
         } else if (person) {
-            console.log("person");
             setPerson(person)
-            setSearchType(7);
+            setSearchType(1);
         } else if (movie) {
-            setSearchType(8);
+            setSearchType(3);
             setMovie(movie)
         }
-        console.log(url);
     }
 
-        console.log(personID);
 
 
 
@@ -100,13 +83,20 @@ function RMS() {
             {url &&
                 <>
                     <p>Not in the mood for this movie ?</p>
-                    <Button type="button" name="search again" onClick={() => setURL("")}/>
+                    <Button type="button" name="search again" onClick={() => setURL("") + resetData}/>
+                </>
+            }
+
+            {person &&
+                <>
+                    <p>Not in the mood for this movie ?</p>
+                    <Button type="button" name="search again" onClick={() => setPerson("") + resetData}/>
                 </>
             }
 
             <article>
                 {/*if state "url" has no value after submit than show section, else don't render */}
-                {!url &&
+                {!url && !person &&
                     <section>
                         <p>Get movie suggestions based on rating, genre or both.</p>
                         <p>If you want to get suggestions based on persons (actor, director...), first look them up.</p>
@@ -128,7 +118,7 @@ function RMS() {
 
             <article>
                 {/*if state "url" has no value after submit than show section, else don't render*/}
-                {!url &&
+                {!url && !person &&
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         {/*if state "lookFor" has value "genre" or "both" than show select-field, else don't render */}
@@ -204,9 +194,7 @@ function RMS() {
                         }
 
                         <section>
-                            {/*{url &&*/}
                             <Button type="submit" name="search"/>
-                            {/*}*/}
                         </section>
                     </form>
                 }
@@ -215,11 +203,21 @@ function RMS() {
             <article>
                 <section>
                     {/*if state "url" has value after submit than show component, else don't render*/}
-                    {url &&
+                    {url && searchType === 2 &&
                         <Data
                             fetchUrl={requests.discover + url}
-                            endpoint="isMovie"
-                            value={setPersonID}
+                            endpoint="rowMovies"
+                        />
+                    }
+                </section>
+
+                <section>
+                    {/*if state "url" has value after submit than show component, else don't render*/}
+                    {url && searchType === 1 &&
+                        <Data
+                            fetchUrl={requests.discover + url}
+                            endpoint="person"
+                            // value={setPersonID}
                         />
                     }
                 </section>
@@ -230,16 +228,10 @@ function RMS() {
                         <Data
                             fetchUrl={requests.search.person.id + person}
                             endpoint="person"
-                            value={() => setPersonID(this.value)}
                         />
                     }
                 </section>
-                {person}
-                <section>
-                </section>
-
             </article>
-
 
             <Outlet/>
         </>

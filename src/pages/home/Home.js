@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from "./Home.module.css"
 import {requests} from "../../helpers/fetchdata/tmdb"
 import Data from "../../components/data/Data";
 import {Outlet} from "react-router-dom";
-import Button from "../../components/buttons/Button";
 
 function Home() {
 
@@ -14,7 +13,7 @@ function Home() {
                     <section>
                         <Data
                             title="Top Trending Movies"
-                            fetchUrl={requests.trending}
+                            fetchUrl={requests.nowPlaying}
                             endpoint="rowMovies"
                         />
                     </section>

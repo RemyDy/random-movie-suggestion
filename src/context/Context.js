@@ -22,22 +22,20 @@ function AuthContextProvider({children}) {
     useEffect(() => {
             const token = localStorage.getItem("token");
 
-            if (token) {
-                // during testing and production enable this:
-                const decodedJWT = jwt_decode(token);
-                fetchUserData(decodedJWT.sub, token);
+            // during testing and production enable this:
+            // if (token) {
+                // const decodedJWT = jwt_decode(token);
+                // fetchUserData(decodedJWT.sub, token);
 
-                // during testing and production disable this:
-                // if (token && isTokenValid(token)) {
-                //     const decodedJWT = jwt_decode(token);
-                //     console.log("token is valid");
-                //     fetchUserData(decodedJWT.sub, token);
-                // } else if (token && !isTokenValid(token)) {
-                //     console.log("token is not valid")
-                //     localStorage.clear();
+                if (token && isTokenValid(token)) {
+                    const decodedJWT = jwt_decode(token);
+                    console.log("token is valid");
+                    fetchUserData(decodedJWT.sub, token);
+                } else if (token && !isTokenValid(token)) {
+                    console.log("token is not valid")
+                    localStorage.clear();
 
             }
-            // during testing and production disable this:
             else {
                 toggleIsAuth({
                     isAuth: false,
