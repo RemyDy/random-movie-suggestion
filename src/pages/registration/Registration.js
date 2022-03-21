@@ -39,7 +39,7 @@ function Registration() {
         try {
             console.log(data);
             // comment out this axios await if you want to test all endpoints and wake the server
-            // const result = await NoviBackend.get(requests.get.test.endpoint);
+            // const result = await NoviBackend.get(requests.get.test.endpoint); //
 
             const result = await NoviBackend.post(requests.post.signup, {
                     username: data.username,
