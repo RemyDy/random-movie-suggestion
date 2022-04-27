@@ -71,7 +71,6 @@ function Profile() {
 
             <article>
                 <section>
-
                     {Object.keys(profileData).length > 0 &&
                         <>
                             <h5>Message from teacher</h5>

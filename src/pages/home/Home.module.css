@@ -1,7 +1,15 @@
+.article {
+    margin-top: 10px;
+}
+
+.title {
+    margin-left: 15px;
+}
+
 .container-tiles {
-    padding-top: 50px;
-    display: flex;
-    justify-content: space-around;
+    /*padding-top: 50px;*/
+    /*display: flex;*/
+    /*justify-content: space-around;*/
 }
 
 .tile {

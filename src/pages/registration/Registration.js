@@ -38,7 +38,7 @@ function Registration() {
 
         try {
             console.log(data);
-            // comment out this axios await if you want to test all endpoints and wake the server
+            // use this axios await comment if you want to test all endpoints and wake the server
             // const result = await NoviBackend.get(requests.get.test.endpoint); //
 
             const result = await NoviBackend.post(requests.post.signup, {
@@ -100,7 +100,6 @@ function Registration() {
                 <button type={"submit"} disabled={loading}>Registreer</button>
             </form>
 
-            {/*section messages (errors and loading messages, but not input-validation-messages)*/}
             <section>
                 <div hidden={loading === false}>
                     <p hidden={loading === false}>Loading... please wait...</p>

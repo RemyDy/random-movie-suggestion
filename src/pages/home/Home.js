@@ -6,17 +6,16 @@ import {Outlet} from "react-router-dom";
 
 function Home() {
 
-
     return (
         <>
-            <article>
-                    <section>
-                        <Data
-                            title="Top Trending Movies"
-                            fetchUrl={requests.nowPlaying}
-                            endpoint="rowMovies"
-                        />
-                    </section>
+            <article className={styled.article}>
+                <section>
+                    <h2 className={styled.title}>Top Trending Movies</h2>
+                    <Data
+                        fetchUrl={requests.nowPlaying}
+                        endpoint="rowMovies"
+                    />
+                </section>
             </article>
 
             <Outlet/>

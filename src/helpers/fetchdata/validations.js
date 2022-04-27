@@ -20,7 +20,7 @@ const validations = {
             message: "Password must have at least 6 characters",
                 pattern: {
                     value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/g,
-                    message: "Kleine letter, hoofdletter, nummer en speciale symbool ( ! @ # $ * ) is verplicht in het wachtwoord"
+                    message: "Lowercase letter, Uppercase letter, number and a symbol ( ! @ # $ * ) is required"
             }
         }
     },

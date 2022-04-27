@@ -52,6 +52,7 @@ function Login() {
     return (
         <>
             <h1>inloggen</h1>
+
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className={styled.form}
@@ -74,7 +75,6 @@ function Login() {
                 <button type="submit">login</button>
             </form>
 
-            {/*section messages (errors and loading messages, but not input-validation-messages)*/}
             <section>
                 <div hidden={loading === false}>
                     <p hidden={loading === false}>Loading... please wait...</p>

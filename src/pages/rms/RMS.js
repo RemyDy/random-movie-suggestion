@@ -72,9 +72,6 @@ function RMS() {
         }
     }
 
-
-
-
     return (
         <>
             <h1>RMS</h1>

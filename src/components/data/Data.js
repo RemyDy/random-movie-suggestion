@@ -42,9 +42,9 @@ function Data({fetchUrl, isLargeTile, endpoint, title}) {
             {
                 {
                     movie: <article className={styled.tile}>
-                        <div className={styled["data_row"]}>
+                        <div className={styled["data-row"]}>
                             <h3 className={styled.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h3>
-                            <div className={styled["data_posters"]}>
+                            <div className={styled["data-posters"]}>
                                 <img
                                     key={oneItem?.id}
                                     src={`${movieImages.baseURL}${imageSize.poster.width185}${oneItem?.poster_path || oneItem?.backdrop_path}`}
@@ -55,25 +55,26 @@ function Data({fetchUrl, isLargeTile, endpoint, title}) {
                         </div>
                     </article>,
 
-                    rowMovies: <article className={styled.row}>
-                        <h2>{title}</h2>
-                        <div className={styled["row_posters"]}>
+                    rowMovies: <article className={styled["row-container"]}>
+                        {/*<h2>{title}</h2>*/}
                             {arrayOfItems.map((movie) => (
                                 <>
-                                    <p className={styled.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</p>
-                                    <img
-                                        className={styled["row_poster"]}
-                                        key={movie?.id}
-                                        src={`${movieImages.baseURL}${imageSize.poster.width154}${movie?.poster_path || movie?.backdrop_path}`}
-                                        alt={movie.name}
-                                    />
+                                    <section className={styled.tile}>
+                                        <p className={styled.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</p>
+                                        <img
+                                            className={styled["row-poster"]}
+                                            key={movie?.id}
+                                            src={`${movieImages.baseURL}${imageSize.poster.width154}${movie?.poster_path || movie?.backdrop_path}`}
+                                            alt={movie.name}
+                                        />
+                                    </section>
                                 </>
                             ))}
-                        </div>
+                        {/*</div>*/}
                     </article>,
 
-                    person: <article className={styled["one_person"]}>
-                        <section></section>
+                    person: <article className={styled["one-person"]}>
+                        {/*<section></section>*/}
                         <input
                             hidden="hidden"
                             type="text"
@@ -81,7 +82,7 @@ function Data({fetchUrl, isLargeTile, endpoint, title}) {
                         />
                         <p id="person_id" hidden="hidden">{id}</p>
                         <img
-                            className={`${styled["data_poster"]} ${isLargeTile && styled["data_posterLarge"]}`}
+                            className={`${styled["data-poster"]} ${isLargeTile && styled["data-posterLarge"]}`}
                             key={oneItem?.id}
                             src={`${movieImages.baseURL}${imageSize.profile.width185}${oneItem[0]?.profile_path}`}
                             alt={oneItem?.name}

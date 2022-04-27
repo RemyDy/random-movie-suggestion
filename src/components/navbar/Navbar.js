@@ -9,37 +9,37 @@ function Navbar() {
     const {logout, isAuth} = useContext(AuthContext);
 
     return (
-            <nav className={styled.navbar}>
-                {isAuth ?
+        <nav className={styled.navbar}>
+            {isAuth ?
                 <img
                     className={styled["navbar-logo"]}
                     src={logo_open}
                     alt="logo-open"
                 />
-                    :
-                    <img
-                        className={styled["navbar-logo"]}
-                        src={logo_closed}
-                        alt="logo-closed"
-                    />
-                }
-                <h1 className={styled.title}>Random Movie Suggester</h1>
-                    {isAuth ?
-                        <div className={styled["private-links"]}>
-                            <NavLink to="profile" end>Profile</NavLink>
-                            <NavLink to="RMS" end>RMS</NavLink>
-                            <NavLink to="Game" end>Game</NavLink>
-                            <NavLink
-                                onClick={logout}
-                                to="/" end>Logout</NavLink>
-                        </div>
-                        :
-                        <div className={styled["public-links"]}>
-                            <NavLink to="/" end>Home</NavLink>
-                            <NavLink to="login" end>Login</NavLink>
-                        </div>
-                    }
-                </nav>
+                :
+                <img
+                    className={styled["navbar-logo"]}
+                    src={logo_closed}
+                    alt="logo-closed"
+                />
+            }
+
+            {isAuth ?
+                <div className={styled["private-links"]}>
+                    <NavLink to="profile" end>Profile</NavLink>
+                    <NavLink to="RMS" end>RMS</NavLink>
+                    <NavLink to="Game" end>Game</NavLink>
+                    <NavLink
+                        onClick={logout}
+                        to="/" end>Logout</NavLink>
+                </div>
+                :
+                <div className={styled["public-links"]}>
+                    <NavLink to="/" end>Home</NavLink>
+                    <NavLink to="login" end>Login</NavLink>
+                </div>
+            }
+        </nav>
     );
 }
 
