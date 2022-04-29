@@ -1,17 +1,17 @@
 import React from 'react';
-import styled from "./Button_module.css";
+import styled from "./Button.module.css"
 
-function Button({name, type, onClick, hidden}) {
+function Button({name, type, onClick}) {
+
     return (
         <>
-                <button
+                <Button
                     className={styled.button}
                     type={type}
                     onClick={onClick}
-                    hidden={hidden}
                 >
                     {name}
-                </button>
+                </Button>
         </>
     );
 }

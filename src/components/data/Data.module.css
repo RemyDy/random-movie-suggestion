@@ -2,6 +2,7 @@
     margin: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     /*flex-basis: content-box;*/
 }
 
@@ -16,7 +17,6 @@
     margin: 1px;
     text-align: center;
     padding-top: 15px;
-
 }
 
 .row-poster {

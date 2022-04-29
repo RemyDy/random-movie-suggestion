@@ -15,6 +15,9 @@ import {AuthContext} from "./context/Context";
 function App() {
     const {isAuth} = useContext(AuthContext);
 
+    // const str = "Fantastic Beasts: The Secrets of";
+    // console.log(str.length);
+
     return (
         <>
             <div className={styled.app}>
@@ -29,15 +32,15 @@ function App() {
                         {isAuth ?
                             <>
                                 <Route path="/profile" element={<Profile/>}/>
-                                <Route path="/rms/*" element={<RMS/>}/>
-                                <Route path="/game/*" element={<Game/>}/>
+                                <Route path="/rms" element={<RMS/>}/>
+                                <Route path="/game" element={<Game/>}/>
                                 <Route path="/" element={<Home/>}/>
                             </>
                             :
                             <>
                                 <Route path="/" element={<Home/>}/>
-                                <Route path="/login/" element={<Login/>}/>
-                                <Route path="/registration/*" element={<Registration/>}/>
+                                <Route path="/login" element={<Login/>}/>
+                                <Route path="/registration" element={<Registration/>}/>
                             </>
                         }
                     </Routes>

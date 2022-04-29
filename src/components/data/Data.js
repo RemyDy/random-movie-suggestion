@@ -4,7 +4,7 @@ import {tmdbBackend, movieImages, imageSize} from "../../helpers/fetchdata/tmdb"
 import {matchURL} from "../../helpers/regex"
 
 
-function Data({fetchUrl, isLargeTile, endpoint, title}) {
+function Data({fetchUrl, isLargeTile, endpoint}) {
     const [oneItem, setOneItem] = useState([]);
     const [arrayOfItems, setArrayOfItems] = useState([]);
     const [id, setID] = useState([]);
@@ -17,7 +17,7 @@ function Data({fetchUrl, isLargeTile, endpoint, title}) {
                 const request = await tmdbBackend.get(fetchUrl)
                 const results = request.data.results
                 const matchResult = request.config.url.match(matchURL);
-                // console.log(results);
+                console.log(results);
                 // console.log(matchResult[0]);
 
                 if (matchResult[0] === "search/person") {
@@ -41,6 +41,17 @@ function Data({fetchUrl, isLargeTile, endpoint, title}) {
         <>
             {
                 {
+                    // banner: <article className={styled.banner}>
+                    //     <img
+                    //         key={oneItem?.id}
+                    //         src={`${movieImages.baseURL}${imageSize.original.backdrop.width300}${oneItem?.backdrop_path}`}
+                    //         alt={oneItem?.name}
+                    //     />
+                    //     <section className={styled["banner-contents"]}>
+                    //         <h1 className={styled.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h1>
+                    //     </section>
+                    // </article>,
+
                     movie: <article className={styled.tile}>
                         <div className={styled["data-row"]}>
                             <h3 className={styled.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h3>
@@ -56,21 +67,17 @@ function Data({fetchUrl, isLargeTile, endpoint, title}) {
                     </article>,
 
                     rowMovies: <article className={styled["row-container"]}>
-                        {/*<h2>{title}</h2>*/}
-                            {arrayOfItems.map((movie) => (
-                                <>
-                                    <section className={styled.tile}>
-                                        <p className={styled.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</p>
-                                        <img
-                                            className={styled["row-poster"]}
-                                            key={movie?.id}
-                                            src={`${movieImages.baseURL}${imageSize.poster.width154}${movie?.poster_path || movie?.backdrop_path}`}
-                                            alt={movie.name}
-                                        />
-                                    </section>
-                                </>
-                            ))}
-                        {/*</div>*/}
+                            {arrayOfItems.map((movie) => {
+                                return <section className={styled.tile} key={movie?.id}>
+                                    <p className={styled.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</p>
+                                    <img
+                                        className={styled["row-poster"]}
+                                        key={movie?.id}
+                                        src={`${movieImages.baseURL}${imageSize.poster.width154}${movie?.poster_path || movie?.backdrop_path}`}
+                                        alt={movie.name}
+                                    />
+                                </section>
+                            })}
                     </article>,
 
                     person: <article className={styled["one-person"]}>

@@ -5,6 +5,12 @@ import Data from "../../components/data/Data";
 import {Outlet} from "react-router-dom";
 
 function Home() {
+    // <header>
+    //     {/*<Data*/}
+    //     {/*    fetchUrl={requests.nowPlaying}*/}
+    //     {/*    endpoint="banner"*/}
+    //     {/*/>*/}
+    // </header>
 
     return (
         <>
@@ -14,6 +20,7 @@ function Home() {
                     <Data
                         fetchUrl={requests.nowPlaying}
                         endpoint="rowMovies"
+                        // backdrop={}
                     />
                 </section>
             </article>

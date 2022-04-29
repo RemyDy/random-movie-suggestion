@@ -4,7 +4,8 @@ import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import {Link, Outlet} from "react-router-dom";
 import logo_loading from "../../helpers/assets/Animatie loading.gif";
-import Button from "../../components/buttons/Button";
+
+// import Button from "../../components/buttons/Button";
 
 function Profile() {
     const [profileData, setProfileData] = useState({});
@@ -84,7 +85,8 @@ function Profile() {
 
                 {Object.keys(profileData).length === 0 &&
                     <section>
-                        <Button type="button" onClick={()=> fetchProfileData()} name="message from teacher" />
+                        {/*<Button type="button" onClick={()=> fetchProfileData()} name="message from teacher" />*/}
+                        <button type="button" onClick={() => fetchProfileData()}>click</button>
                         <div hidden={loading === false}>
                             <p>Loading... please wait...</p>
                             <img src={logo_loading} alt="logo-loading" width="75px"/>
@@ -99,7 +101,6 @@ function Profile() {
             <Outlet/>
         </>
     )
-        ;
 }
 
 export default Profile;

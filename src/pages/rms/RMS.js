@@ -18,10 +18,8 @@ function RMS() {
         }
     });
 
-
-
     const [url, setURL] = useState("");
-    const [rating, setRating] = useState("");
+    // const [rating, setRating] = useState("");
     const [person, setPerson] = useState("")
     const [lookFor, setLookFor] = useState("");
     const [searchType, setSearchType] = useState(0);

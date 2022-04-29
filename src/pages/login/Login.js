@@ -7,6 +7,7 @@ import validations from "../../helpers/fetchdata/validations";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import logo_loading from "../../helpers/assets/Animatie loading.gif";
+import Tile from "../../components/Tile";
 
 function Login() {
     const {login} = useContext(AuthContext);
@@ -40,7 +41,8 @@ function Login() {
                 cancelToken: axiosCancelToken.token
             });
             if (result.status === 200) {
-                login(result.data?.accessToken)
+                const token = result.data?.accessToken
+                login(token)
             }
         } catch (e) {
             console.error(e.response);
@@ -53,27 +55,28 @@ function Login() {
         <>
             <h1>inloggen</h1>
 
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                className={styled.form}
-            >
-                <section>
-                    <label htmlFor="username-field">Username
-                        <input type="text"
-                               id="username-field" {...register("username", validations.username)} />
-                    </label>
-                    <p>{errors?.username && errors.username?.message}</p>
-                </section>
+            <Tile />
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className={styled.form}
+                >
+                    <section>
+                        <label htmlFor="username-field">Username
+                            <input type="text"
+                                   id="username-field" {...register("username", validations.username)} />
+                        </label>
+                        <p>{errors?.username && errors.username?.message}</p>
+                    </section>
 
-                <section>
-                    <label htmlFor="password-field">Password
-                        <input type="password"
-                               id="password-field" {...register("password", validations.password)} />
-                    </label>
-                    <p>{errors?.password && errors.password?.message}</p>
-                </section>
-                <button type="submit">login</button>
-            </form>
+                    <section>
+                        <label htmlFor="password-field">Password
+                            <input type="password"
+                                   id="password-field" {...register("password", validations.password)} />
+                        </label>
+                        <p>{errors?.password && errors.password?.message}</p>
+                    </section>
+                    <button type="submit">login</button>
+                </form>
 
             <section>
                 <div hidden={loading === false}>
@@ -85,7 +88,8 @@ function Login() {
                     <p> Invalid username and/or password. Press F5 and try again, or <Link
                         to="/registration">register</Link> first.</p>
                 }
-                <p hidden={error || loading}>Don't have an account yet ?<Link to="/registration"> Register</Link> first.</p>
+                <p hidden={error || loading}>Don't have an account yet ?<Link to="/registration"> Register</Link> first.
+                </p>
             </section>
 
             <Outlet/>

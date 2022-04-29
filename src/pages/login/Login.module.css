@@ -20,5 +20,8 @@ button {
 }
 
 .form {
-
+    position: relative;
+    left: 30px;
+    top: 20px;
 }
+

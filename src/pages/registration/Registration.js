@@ -1,4 +1,3 @@
-// noinspection JSCheckFunctionSignatures
 
 import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
@@ -8,11 +7,13 @@ import validations from "../../helpers/fetchdata/validations";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import logo_loading from "../../helpers/assets/Animatie loading.gif"
+// import Button from "../../components/buttons/Button";
+import Tile from "../../components/Tile";
+import InputField from "../../components/InputField";
 
 function Registration() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [serverResponse, setServerResponse] = useState(null);
     const navigate = useNavigate();
     const admin = process.env.REACT_APP_ADMIN_PASSWORD;
     const {register, handleSubmit, watch, setValue, formState: {errors}} = useForm();
@@ -38,9 +39,8 @@ function Registration() {
 
         try {
             console.log(data);
-            // use this axios await comment if you want to test all endpoints and wake the server
-            // const result = await NoviBackend.get(requests.get.test.endpoint); //
 
+            // const result = await NoviBackend.get(requests.get.test.endpoint, {
             const result = await NoviBackend.post(requests.post.signup, {
                     username: data.username,
                     email: data.email,
@@ -97,6 +97,8 @@ function Registration() {
                     </label>
                 </section>
 
+
+
                 <button type={"submit"} disabled={loading}>Registreer</button>
             </form>
 
@@ -111,6 +113,22 @@ function Registration() {
             </section>
 
             <p hidden={error || loading}>Do you already have an account? Go to <Link to="/login">Login</Link></p>
+
+            <Tile />
+
+            {/*<Button*/}
+            {/*    type={"submit"}*/}
+            {/*    disabled={loading}*/}
+            {/*    name="Register"*/}
+            {/*/>*/}
+
+            <InputField
+                htmlFor="test-field"
+                type="username"
+                name="username"
+                register={register}
+                // ref={register("username", validations.username)}
+            />
 
             <Outlet/>
         </>
