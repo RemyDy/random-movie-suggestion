@@ -4,7 +4,7 @@ body {
 }
 
 .app {
-    z-index: -2;
+    /*z-index: -2;*/
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -50,7 +50,6 @@ text {
     background-color: #00627C;
     text-align: center;
 }
-
 
 .logo-tmdb {
     border-left-width: 12px;

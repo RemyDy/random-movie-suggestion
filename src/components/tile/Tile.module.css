@@ -10,6 +10,7 @@
 }
 
 .header {
+    /*margin-top: -10px;*/
     font-size: xx-large;
     text-decoration: underline;
 }
@@ -21,7 +22,47 @@
     flex-grow: 1;
 }
 
+/*----------------------------*/
+
 .small-tile {
     background-color: white;
+}
+
+/*----------------------------*/
+
+#quote-tile {
+    background-color: white;
+    border: 35px solid #00627C;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.tile-quote {
+    background-color: white;
+    border: 35px solid #00627C;
+}
+
+.quote-line {
+    color: #C89028;
+    font-weight: bold;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
+.quote-movie {
+    color: #05303D;
+    font-weight: bold;
+    align-self: flex-end;
+    margin-bottom: 0;
+}
+
+.quote-by {
+    margin-top: 3px;
+    color: #05303D;
+    font-weight: bold;
+    align-self: flex-end;
 }
 

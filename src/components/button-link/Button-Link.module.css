@@ -17,6 +17,8 @@
     border-radius: 100px;
     color: #00627C;
     align-self: center;
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
 
 .button:hover {

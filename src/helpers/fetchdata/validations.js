@@ -1,15 +1,18 @@
 const validations = {
+    validate: {
+
+    },
     username: {
         required: "Name is required",
         minLength: {
             value: 6,
-            message: "Password must have at least 6 characters",
+            message: "Name must have at least 6 characters",
         }
     },
     email: {
         required: "E-mail is required",
         pattern: {
-            value: /^[a-zA-Z0–9+_.-]+@[a-zA-Z0–9.-]+$/g,
+            value: /^[a-zA-Z0–9+_.-]+@[a-zA-Z0–9.-]+[.a-zA]$/g,
             message: "E-mail is not valid, @ is required, kindly correct s.v.p.",
         }
     },
@@ -24,6 +27,13 @@ const validations = {
             }
         }
     },
+    role:{
+        minLength: {
+            value: 4,
+            message: "Role must have at least 4 characters",
+        }
+    },
+
     person_or_movie: {
         pattern: {
             value: /(\w+)\s\+?(\+\w+)?/gm,

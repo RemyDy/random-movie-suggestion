@@ -1,3 +1,4 @@
+
 .page-wrapper {
     margin: 0;
     display: flex;
@@ -13,11 +14,6 @@
     border: 35px solid #00627C
 }
 
-#tile-quote {
-    background-color: white;
-    border: 35px solid #00627C;
-}
-
 .form {
     display: flex;
     flex-direction: column;
@@ -25,12 +21,17 @@
     flex-grow: 1;
 }
 
+#tile-quote {
+    background-color: white;
+    border: 35px solid #00627C;
+}
+
 .quote {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     align-self: center;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .quote-line{
@@ -38,6 +39,7 @@
     font-weight: bold;
     justify-content: space-evenly;
     flex-grow: 1;
+
 }
 
 h4 {

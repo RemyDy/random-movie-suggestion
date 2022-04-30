@@ -3,7 +3,7 @@ import validations from "../../helpers/fetchdata/validations";
 
 
 
-function InputField({type, register, name, label, placeholder}) {
+function InputField({type, register, name, label, placeholder, value, hidden}) {
     return (
         <article className={styled.container}>
             <label
@@ -12,8 +12,10 @@ function InputField({type, register, name, label, placeholder}) {
             <input className={styled.input}
                    type={type}
                    id={label}
+                   value={value}
                    placeholder={placeholder}
-                   {...register(name, validations.username)}
+                   hidden={hidden}
+                   {...register(name, validations.validate)}
             />
         </article>
     )
