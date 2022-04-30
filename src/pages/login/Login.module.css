@@ -1,23 +1,59 @@
-.login {
+.page-wrapper {
     margin: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.login-username {
-    margin: 10px;
-    outline: white;
-}
-
-.login-password {
-    margin: 10px;
-    outline: white;
-}
-
-.tile {
+.tiles {
     display: flex;
-    align-self: center;
 }
+
+#tile-login {
+    border: 35px solid #00627C
+}
+
+#tile-quote {
+    background-color: white;
+    border: 35px solid #00627C;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
+.quote {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.quote-line{
+    color: #C89028;
+    font-weight: bold;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
+h4 {
+    color: #05303D;
+    font-weight: bold;
+    align-self: flex-end;
+    margin-bottom: 0;
+}
+
+h5 {
+    margin-top: 3px;
+    color: #05303D;
+    font-weight: bold;
+    align-self: flex-end;
+}
+
 
 
 

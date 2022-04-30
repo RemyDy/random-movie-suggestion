@@ -1,17 +1,29 @@
 import styled from "./Tile.module.css"
 
-function Tile({children, title,}) {
+export function Tile({children, title, id}) {
 
     return (
-        <article className={styled.tile}>
+        <article
+            className={styled.tile}
+            id={id}
+        >
             <h2 className={styled.header}>
                 {title}
             </h2>
-            <section className={styled.section}>
+            <div className={styled.main}>
                 {children}
-            </section>
+            </div>
         </article>
     )
 }
 
-export default Tile;
+export function SmallTile({name, id, children}) {
+
+    return(
+        <div
+            className={styled["small-tile"]}
+            id={id}>
+            {children}</div>
+    )
+}
+
