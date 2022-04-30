@@ -5,8 +5,6 @@ import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import {Link, Outlet} from "react-router-dom";
 import logo_loading from "../../helpers/assets/Animatie loading.gif";
 
-// import Button from "../../components/buttons/Button";
-
 function Profile() {
     const [profileData, setProfileData] = useState({});
     const [loading, toggleLoading] = useState(false);

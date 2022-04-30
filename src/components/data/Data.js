@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "./Data.module.css"
 import {tmdbBackend, movieImages, imageSize} from "../../helpers/fetchdata/tmdb";
 import {matchURL} from "../../helpers/regex"
+import truncate from "../../helpers/truncate";
 
 
 function Data({fetchUrl, isLargeTile, endpoint}) {
@@ -18,13 +19,14 @@ function Data({fetchUrl, isLargeTile, endpoint}) {
                 const results = request.data.results
                 const matchResult = request.config.url.match(matchURL);
                 console.log(results);
-                // console.log(matchResult[0]);
+                console.log(matchResult[0]);
 
                 if (matchResult[0] === "search/person") {
                     results.length > 1 ? setArrayOfItems(results) : setOneItem(results);
                     const id = results[0].id
                     setID(id);
                 }
+
                 results.length > 1 ? setArrayOfItems(results) : setOneItem(results);
 
                 return request;
@@ -35,7 +37,6 @@ function Data({fetchUrl, isLargeTile, endpoint}) {
 
         fetchData();
     }, [fetchUrl]);
-
 
     return (
         <>
@@ -67,13 +68,15 @@ function Data({fetchUrl, isLargeTile, endpoint}) {
                     </article>,
 
                     rowMovies: <article className={styled["row-container"]}>
-                            {arrayOfItems.map((movie) => {
+                        {arrayOfItems.map((movie) => {
+                                let title = movie?.title || movie?.name || movie?.original_title || movie?.original_name
+                                let titleTruncated = truncate(title, 20);
                                 return <section className={styled.tile} key={movie?.id}>
-                                    <p className={styled.title}>{movie?.title || movie?.name || movie?.original_title || movie?.original_name}</p>
+                                    <p className={styled.title}>{titleTruncated}</p>
                                     <img
                                         className={styled["row-poster"]}
                                         key={movie?.id}
-                                        src={`${movieImages.baseURL}${imageSize.poster.width154}${movie?.poster_path || movie?.backdrop_path}`}
+                                        src={`${movieImages.baseURL}${imageSize.poster.width500}${movie?.poster_path || movie?.backdrop_path}`}
                                         alt={movie.name}
                                     />
                                 </section>

@@ -14,14 +14,12 @@
     outline: white;
 }
 
-button {
-    margin: 10px;
-    max-width: 100px;
+.tile {
+    display: flex;
+    align-self: center;
 }
 
-.form {
-    position: relative;
-    left: 30px;
-    top: 20px;
-}
+
+
+
 

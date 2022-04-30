@@ -3,7 +3,6 @@ import {Outlet} from "react-router-dom";
 import Data from "../../components/data/Data";
 import {requests} from "../../helpers/fetchdata/tmdb"
 import {useForm} from "react-hook-form";
-import Button from "../../components/buttons/Button";
 
 // import validations from "../../helpers/fetchdata/validations";
 
@@ -78,14 +77,14 @@ function RMS() {
             {url &&
                 <>
                     <p>Not in the mood for this movie ?</p>
-                    <Button type="button" name="search again" onClick={() => setURL("") + resetData}/>
+                    {/*<Button type="button" name="search again" onClick={() => setURL("") + resetData}/>*/}
                 </>
             }
 
             {person &&
                 <>
                     <p>Not in the mood for this movie ?</p>
-                    <Button type="button" name="search again" onClick={() => setPerson("") + resetData}/>
+                    {/*<Button type="button" name="search again" onClick={() => setPerson("") + resetData}/>*/}
                 </>
             }
 
@@ -189,7 +188,7 @@ function RMS() {
                         }
 
                         <section>
-                            <Button type="submit" name="search"/>
+                            {/*<Button type="submit" name="search"/>*/}
                         </section>
                     </form>
                 }

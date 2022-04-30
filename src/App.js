@@ -15,9 +15,6 @@ import {AuthContext} from "./context/Context";
 function App() {
     const {isAuth} = useContext(AuthContext);
 
-    // const str = "Fantastic Beasts: The Secrets of";
-    // console.log(str.length);
-
     return (
         <>
             <div className={styled.app}>
