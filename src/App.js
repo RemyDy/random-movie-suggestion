@@ -17,43 +17,45 @@ function App() {
 
     return (
         <>
-            <div className={styled.app}>
+            <article className={styled["page-wrapper"]}>
+                <section className={styled["page-items"]}>
 
-                <header>
-                    <Navbar />
-                    <h1 className={styled.title}>Random Movie Suggester</h1>
-                </header>
+                    <header className={styled.header}>
+                        <Navbar/>
+                        <h1 className={styled.title}>Random Movie Suggester</h1>
+                    </header>
 
-                <main>
-                    <Routes>
-                        {isAuth ?
-                            <>
-                                <Route path="/profile" element={<Profile/>}/>
-                                <Route path="/rms" element={<RMS/>}/>
-                                <Route path="/game" element={<Game/>}/>
-                                <Route path="/" element={<Home/>}/>
-                            </>
-                            :
-                            <>
-                                <Route path="/" element={<Home/>}/>
-                                <Route path="/login" element={<Login/>}/>
-                                <Route path="/registration" element={<Registration/>}/>
-                            </>
-                        }
-                    </Routes>
-                </main>
+                    <main className={styled.content}>
+                        <Routes>
+                            {isAuth ?
+                                <>
+                                    <Route path="/profile" element={<Profile/>}/>
+                                    <Route path="/rms" element={<RMS/>}/>
+                                    <Route path="/game" element={<Game/>}/>
+                                    <Route path="/" element={<Home/>}/>
+                                </>
+                                :
+                                <>
+                                    <Route path="/" element={<Home/>}/>
+                                    <Route path="/login" element={<Login/>}/>
+                                    <Route path="/registration" element={<Registration/>}/>
+                                </>
+                            }
+                        </Routes>
+                    </main>
 
-                <footer className={styled.footer}>
-                    <div className={styled.sponsor}>
-                        <img className={styled["logo-tmdb"]} src={logoTMDB} alt="logo-tmdb" width="175px"/>
-                        <h5 className={styled.disclaimer}>
-                            This product uses the TMDB API but is not endorsed or certified by TMDB
-                        </h5>
-                    </div>
-                    <p className={styled.contact}>Developed by: Remco, email: remco.schut@novi-education.nl</p>
-                </footer>
+                    <footer className={styled.footer}>
+                        <div className={styled.sponsor}>
+                            <img className={styled["logo-tmdb"]} src={logoTMDB} alt="logo-tmdb" width="175px"/>
+                            <h5 className={styled.disclaimer}>
+                                This product uses the TMDB API but is not endorsed or certified by TMDB
+                            </h5>
+                        </div>
+                        <p className={styled.contact}>Developed by: Remco, email: remco.schut@novi-education.nl</p>
+                    </footer>
 
-            </div>
+                </section>
+            </article>
         </>
     )
 }

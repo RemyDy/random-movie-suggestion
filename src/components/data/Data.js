@@ -12,7 +12,7 @@ function Data({fetchUrl, isLargeTile, endpoint}) {
 
     useEffect(() => {
 
-        async function fetchData() {
+         async function fetchData() {
 
             try {
                 const request = await tmdbBackend.get(fetchUrl)

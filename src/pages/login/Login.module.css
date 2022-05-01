@@ -1,17 +1,24 @@
 
 .page-wrapper {
     margin: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-content: center;
     align-items: center;
 }
 
 .tiles {
     display: flex;
+    flex-grow: 1;
 }
 
 #tile-login {
     border: 35px solid #00627C
+}
+
+.text-register-first {
+    display: flex;
 }
 
 .form {
@@ -34,7 +41,7 @@
     margin-top: 50px;
 }
 
-.quote-line{
+.quote-line {
     color: #C89028;
     font-weight: bold;
     justify-content: space-evenly;

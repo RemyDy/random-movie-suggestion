@@ -1,100 +1,90 @@
-import React, {useState} from 'react';
-import {Outlet} from "react-router-dom";
-import {useForm} from "react-hook-form";
-import Data from "../../components/data/Data";
-import {myKey, requests} from "../../helpers/fetchdata/tmdb";
-// import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
-import {tmdbBackend} from "../../helpers/fetchdata/tmdb";
+import {Button} from "../../components/button-link/Button-Link";
+import {myKey, requests, tmdbBackend} from "../../helpers/fetchdata/tmdb";
+import {useState} from "react";
+
+
+// import {matchURL} from "../../helpers/regex";
+
+// console.log(matchResult[0]);
+
+// const matchResult = request.config.url.match(matchURL);
+
+// if (matchResult[0] === "search/person") {
+//     results.length > 1 ? setArrayOfItems(results) : setOneItem(results);
+//     const id = results[0].id
+//     setID(id);
+// }
+
+// results.length > 1 ? setArrayOfItems(results) : setOneItem(results);
 
 
 function Game() {
-    const {register, handleSubmit, formstate: errors} = useForm();
-    const [person, setPerson] = useState("");
-    const [movieID, setMovieID] = useState("");
-    let queryPerson = `search/person?api_key=${myKey}&query=${person}`;
-    let queryMovieCredits = `person/?api_key=${myKey}&query=${movieID}`;
-    const searchMovie = `search/movie?api_key=${myKey}&query=`;
 
-    function onSubmit(data) {
-            let personData = data.firstname + "+" + data.lastname;
-            setPerson(personData);
+    const [movieIdOne, setMovieIdOne] = useState(0)
+    const [movieIdTwo, setMovieIdTwo] = useState(0)
+    const [movieIdThree, setMovieIdThree] = useState(0)
 
-        console.log(personData)
-        console.log(requests.search.person + personData);
+    async function fetch20Movies() {
 
-        return personData;
+        // setMovie(movieArray[Math.floor(Math.random() * movieArray.length - 1)]);
+
+        const nr = (Math.floor(Math.random() * 500));
+        console.log(nr);
+
+        try {
+            console.log(nr);
+
+            const request = await tmdbBackend.get(`/discover/movie?api_key=${myKey}&language=en-US&include_adult=false&page=${nr}`);
+            const results = request.data.results
+
+            const mapOnId = results.map((movie) => {
+                return movie.id;
+            });
+
+            const threeId = mapOnId.slice(0, 3)
+            const one = threeId[0];
+            const two = threeId[1];
+            const three = threeId[2];
+
+            const movieOne = await tmdbBackend.get(`movie/${one}?api_key=${myKey}&language=en-US&&append_to_response=credits`);
+            const movieTwo = await tmdbBackend.get(`movie/${two}?api_key=${myKey}&language=en-US&&append_to_response=credits`);
+            const movieTree = await tmdbBackend.get(`movie/${three}?api_key=${myKey}&language=en-US&&append_to_response=credits`);
+
+
+
+            setMovieIdOne(one)
+            setMovieIdTwo(two)
+
+            console.log(movieOne);
+            console.log(movieTwo);
+            console.log(movieTree);
+
+
+
+            return request;
+        } catch (e) {
+            console.error(e)
+        }
+
+
     }
 
-    // async function queryDetails() {
-    //     try {
-    //         const result = await tmdbBackend.get(requests.search.person + queryPerson
-    //             // {
-    //             //     cancelToken: axiosCancelToken.token
-    //             // }
-    //         )
-    //         console.log(result);
-    //         console.log(result.data.results[0].id)
-    //         setMovieID(result.data.results[0].id);
-    //         console.log()
-    //
-    //     } catch (e) {
-    //         console.error(e.response);
-    //     }
-    //
-    //     try {
-    //         const result = await tmdbBackend.get()
-    //     } catch (e) {
-    //
-    //     }
-    //
-    // }
 
     return (
         <>
-            <div className="home">
-                <h2>Game</h2>
-            </div>
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="actor-firstname-field">Firstname Actor :</label>
-                <input
-                    type="text"
-                    placeholder="Edward"
-                    {...register("firstname", {required: true})}
+            <article>
+                <Button
+                    name="Start Game"
+                    type="button"
+                    onclick={() => fetch20Movies()}
                 />
-                <label htmlFor="actor-lastname-field">Lastname Actor :</label>
-                <input
-                    type="text"
-                    placeholder="Norton"
-                    {...register("lastname", {required: true})}
-                />
-                <button type="submit">search</button>
-            </form>
+            </article>
 
-            {/*{person &&*/}
-            {/*    <>*/}
-            {/*        <p>{person}</p>*/}
-            {/*        <button*/}
-            {/*            onClick={queryDetails}>als je search query klopt*/}
-            {/*        </button>*/}
-            {/*    </>*/}
-            }
+            <p>What {"actor name"} highest grossing movies ? </p>
 
-
-            {movieID &&
-                <>
-                    <p>test</p>
-
-                    {/*<Data*/}
-                    {/*    fetchUrl={requests.search.data}*/}
-                    {/*    endpoint="isMovie"*/}
-                    {/*/>*/}
-                </>
-            }
-
-            <Outlet/>
         </>
-    );
+
+    )
 }
 
 export default Game;
