@@ -42,17 +42,6 @@ function Data({fetchUrl, isLargeTile, endpoint}) {
         <>
             {
                 {
-                    // banner: <article className={styled.banner}>
-                    //     <img
-                    //         key={oneItem?.id}
-                    //         src={`${movieImages.baseURL}${imageSize.original.backdrop.width300}${oneItem?.backdrop_path}`}
-                    //         alt={oneItem?.name}
-                    //     />
-                    //     <section className={styled["banner-contents"]}>
-                    //         <h1 className={styled.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h1>
-                    //     </section>
-                    // </article>,
-
                     movie: <article className={styled.tile}>
                         <div className={styled["data-row"]}>
                             <h3 className={styled.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h3>

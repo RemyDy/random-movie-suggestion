@@ -1,6 +1,7 @@
 import {Button} from "../../components/button-link/Button-Link";
-import {myKey, requests, tmdbBackend} from "../../helpers/fetchdata/tmdb";
+import {myKey, tmdbBackend} from "../../helpers/fetchdata/tmdb";
 import {useState} from "react";
+import {Tile} from "../../components/tile/Tile";
 
 
 // import {matchURL} from "../../helpers/regex";
@@ -20,11 +21,11 @@ import {useState} from "react";
 
 function Game() {
 
-    const [movieIdOne, setMovieIdOne] = useState(0)
-    const [movieIdTwo, setMovieIdTwo] = useState(0)
-    const [movieIdThree, setMovieIdThree] = useState(0)
+    const [movieOne, setMovieOne] = useState({})
+    const [movieTwo, setMovieTwo] = useState({})
+    const [movieTree, setMovieThree] = useState({})
 
-    async function fetch20Movies() {
+    async function fetchMovies() {
 
         // setMovie(movieArray[Math.floor(Math.random() * movieArray.length - 1)]);
 
@@ -50,25 +51,16 @@ function Game() {
             const movieTwo = await tmdbBackend.get(`movie/${two}?api_key=${myKey}&language=en-US&&append_to_response=credits`);
             const movieTree = await tmdbBackend.get(`movie/${three}?api_key=${myKey}&language=en-US&&append_to_response=credits`);
 
-
-
-            setMovieIdOne(one)
-            setMovieIdTwo(two)
-
-            console.log(movieOne);
-            console.log(movieTwo);
-            console.log(movieTree);
-
-
+            setMovieOne(movieOne)
+            setMovieTwo(movieTwo)
+            setMovieThree(movieTree)
 
             return request;
         } catch (e) {
             console.error(e)
         }
 
-
     }
-
 
     return (
         <>
@@ -76,13 +68,28 @@ function Game() {
                 <Button
                     name="Start Game"
                     type="button"
-                    onclick={() => fetch20Movies()}
+                    onclick={() => fetchMovies()}
                 />
             </article>
 
-            <p>What {"actor name"} highest grossing movies ? </p>
+            {Object.keys(movieOne).length > 0 &&
+                <>
+                    <Tile>
+                        <img src={movieOne.data} alt="movie backdrop" width="100px"/>
+                    </Tile>
+
+                    <Tile>
+                        <img src={movieTwo.data} alt="movie backdrop"/>
+                    </Tile>
+
+                    <Tile>
+                        <img src={movieTree.data} alt="movie backdrop"/>
+                    </Tile>
+                </>
+            }
 
         </>
+
 
     )
 }
