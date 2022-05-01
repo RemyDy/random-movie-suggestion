@@ -80,7 +80,7 @@ npm install
 
 Onder water worden dan alle benodigde afhankelijkheden (dependencies) voor je geïnstalleerd.
 Handig! Hoef je niet zelf uit te zoeken wat de app nodig heeft en hoef je deze niet zelf te installeren.
-Wanner alle benodigde dependencies zijn geïnstalleerd kun je de applicatie starten door in de terminal te typen:
+Wanneer alle benodigde dependencies zijn geïnstalleerd kun je de applicatie starten door in de terminal te typen:
 
 ```
 npm start
@@ -100,10 +100,9 @@ Deze drie zijn bereikbaar zonder in te loggen:
 3. Sign up (registratie) Pagina (`/registration`)
 
 Deze drie zijn bereikbaar na ingelogd te zijn op de Backend:
-4. Profile Pagina (`/profile`)
-5. RMS (Random Movie Suggester) Pagina (`/rms`)
-6. Game Pagina (`/game`)
-
+1. Profile Pagina (`/profile`)
+2. RMS (Random Movie Suggester) Pagina (`/rms`)
+3. Game Pagina (`/game`)
 
 ## Registreren
 
