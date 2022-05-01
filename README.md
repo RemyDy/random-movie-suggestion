@@ -7,38 +7,80 @@ te zien zijn.
 Wil je meer gericht zoeken, zoals op genre? 
 Log dan via de app in op de Novi backend en begeef je naar de private pagina's.
 
+## IDE installeren
+
+Als eerste dien je een code-editor te downloaden en te installeren om de app te kunnen starten.
+Zo'n editor wordt ook wel een Integrated Development Environment (IDE) genoemd.
+Er zijn meerdere mogelijkheden zoals o.a. Visual Code, maar zelf gebruik ik Webstorm van de uitgever JetBrains.
+Je kunt Webstorm downloaden en installeren via deze link: (https://www.jetbrains.com/webstorm/download/)
+
+Let wel: Webstorm is een betaald product, het staat je vrij een andere IDE te googelen en te installeren.
+
+## Node.js installeren
+
+Ten tweede dien je Node te installeren om de applicatie te kunnen starten en gebruiken.
+Node.js is een runtime omgeving om Javascript op onze lokale computer te draaien in plaats van in de browser.
+Je kan Node.js downloaden en installeren via de website: (https://nodejs.org/en/download/)
+
+Wanneer je dit gedaan hebt, kun je testen of de installatie succesvol was. 
+Dat doe je door het volgende commando in de terminal te typen en dan op enter te drukken:
+
+```
+node -v
+```
+
+Als Node.js aanwezig is zul je een versienummer te zien krijgen, zoals bijvoorbeeld v13.9.3. 
+Krijg je een andere melding, zoals bijvoorbeeld node: command not found dan is het nog niet (juist) geïnstalleerd.
+
+Vervolgens willen we checken of NPM correct mee geïnstalleerd is. 
+Vraag het versienummer op door het volgende in te toetsen in de terminal en daarna op enter te drukken:
+
+```
+npm -v
+```
+
+Krijg je de melding: npm: command not found Installeer Node.js dan opnieuw. 
+Je kan Node als runtime engine gebruikt om JavaScript buiten de browser uit te voeren.
+Als je iets wil aanpassen in het bestand en dit wil uitvoeren moet iedere keer het commando Node ingetypt worden.
+Dat is nogal zonde van de tijd. Daarom kan je beter ook (nodemon) installeren.
+Met deze extensie hoeft het JavaScript bestand maar één keer aangeroepen te worden.
+
+Installeer nodemon daarom globaal op de computer door het volgende commando in te typen in de terminal:
+
+```
+npm install -g nodemon
+```
+
+*Werk je op een Windows en krijg je een foutmelding?
+Dit betekent dat het runnen van scripts niet is toegestaan op jouw computer. 
+Dit kun je handmatig aanpassen door het programma PowerShell op te starten als administrator. 
+(Rechtermuisknop op applicatie-icoon > "Open als administrator"). 
+Voer dan het volgende commando in:
+
+```
+Set-ExecutionPolicy Unrestricted
+```
+
+*Werk je op een MAC en krijg je een foutmelding?
+Voer dan het volgende commando uit:
+
+```
+ sudo npm install -g nodemon
+```
+
 ## Applicatie starten
 
+We zijn er bijna!
 Voordat je de applicatie kan gebruiken dien je deze eerst te clonen naar jouw lokale machine.
-Is het clonen afgerond? installeer je eerst de benodigde `node_modules` door de volgende commando's in de terminal te runnen:
+Is het clonen afgerond? installeer je eerst de benodigde `node_modules` door de volgende commando in de terminal te runnen:
 
 ```
 npm install
 ```
 
-Wanneer dit klaar is, dien je de volgende dependencies te installeren:
-
-```
-npm install axios
-```
-
-```
-npm install jwt-decode
-```
-
-```
-npm install react-hook-form
-```
-
-```
-npm install react-router-dom
-```
-
-```
-npm install styled-components
-```
-
-Wanner alle benodigde dependencies zijn geinstalleerd kun je de applicatie starten met behulp van:
+Onder water worden dan alle benodigde afhankelijkheden (dependencies) voor je geïnstalleerd.
+Handig! Hoef je niet zelf uit te zoeken wat de app nodig heeft en hoef je deze niet zelf te installeren.
+Wanner alle benodigde dependencies zijn geïnstalleerd kun je de applicatie starten door in de terminal te typen:
 
 ```
 npm start
@@ -57,10 +99,11 @@ Deze drie zijn bereikbaar zonder in te loggen:
 2. Sign in (login) Pagina (`/login`)
 3. Sign up (registratie) Pagina (`/registration`)
 
-Deze drie zijn alleen bereikbaar na ingelogd te zijn op de Novi Backend:
+Deze drie zijn bereikbaar na ingelogd te zijn op de Backend:
 4. Profile Pagina (`/profile`)
-5. Game Pagina (`/game`)
-6. RMS (Random Movie Suggester) Pagina (`/rms`)
+5. RMS (Random Movie Suggester) Pagina (`/rms`)
+6. Game Pagina (`/game`)
+
 
 ## Registreren
 

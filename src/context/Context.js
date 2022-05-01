@@ -1,12 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// noinspection JSIgnoredPromiseFromCall,JSCheckFunctionSignatures
-
-import styled from "./Context.module.css"
+// import styled from "./Context.module.css"
 import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import {NoviBackend, requests} from "../helpers/fetchdata/novi";
-import animatie_loading from "../../src/helpers/assets/Animatie loading.gif"
+// import animatie_loading from "../../src/helpers/assets/Animatie loading.gif"
 import isTokenValid from "../helpers/isTokenValid";
 
 export const AuthContext = createContext({});
@@ -20,33 +17,26 @@ function AuthContextProvider({children}) {
     const navigate = useNavigate();
 
     useEffect(() => {
-            const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-            // during testing and production enable this:
-            // if (token) {
-                // const decodedJWT = jwt_decode(token);
-                // fetchUserData(decodedJWT.sub, token);
+        if (token && isTokenValid(token)) {
+            const decodedJWT = jwt_decode(token);
+            console.log("token is valid");
+            fetchUserData(decodedJWT.sub, token);
+        } else if (token && !isTokenValid(token)) {
+            console.log("token is not valid")
+            localStorage.clear();
 
-                if (token && isTokenValid(token)) {
-                    const decodedJWT = jwt_decode(token);
-                    console.log("token is valid");
-                    fetchUserData(decodedJWT.sub, token);
-                } else if (token && !isTokenValid(token)) {
-                    console.log("token is not valid")
-                    localStorage.clear();
+        } else {
+            toggleIsAuth({
+                isAuth: false,
+                user: null,
+                status: "done",
+            });
+        }
+    }, []);
 
-            }
-            else {
-                toggleIsAuth({
-                    isAuth: false,
-                    user: null,
-                    status: "done",
-                });
-            }
-        },
-        []);
-
-    function login(JWT) {
+    function login(JWT)  {
         if (JWT !== undefined) {
             localStorage.setItem("token", JWT)
         }
@@ -64,6 +54,9 @@ function AuthContextProvider({children}) {
         console.log('Gebruiker is uitgelogd!');
         navigate("/");
     }
+
+    // useEffect(()=>{}, [])
+    // useCallback(()=>{  }, [])
 
     async function fetchUserData(id, token, redirectUrl) {
 

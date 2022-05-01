@@ -11,17 +11,21 @@ function Navbar() {
     return (
         <nav className={styled.navbar}>
             {isAuth ?
-                <img
-                    className={styled["navbar-logo"]}
-                    src={logo_open}
-                    alt="logo-open"
-                />
+                <div className={styled["logo-holder"]}>
+                    <img
+                        className={styled["navbar-logo"]}
+                        src={logo_open}
+                        alt="logo-open"
+                    />
+                </div>
                 :
-                <img
-                    className={styled["navbar-logo"]}
-                    src={logo_closed}
-                    alt="logo-closed"
-                />
+                <div>
+                    <img
+                        className={styled["navbar-logo"]}
+                        src={logo_closed}
+                        alt="logo-closed"
+                    />
+                </div>
             }
 
             {isAuth ?

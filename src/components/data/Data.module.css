@@ -1,29 +1,29 @@
 .row-container {
-    margin: 0;
     display: flex;
     flex-wrap: wrap;
-    /*flex-basis: content-box;*/
+    justify-content: center;
+    gap: 2em;
+    margin: 30px;
 }
 
 .tile {
     width: 300px;
-    height: 350px;
+    height: 360px;
     border: 20px solid #00627C;
-    margin: 15px 15px 15px 15px;
 }
 
 .title {
     margin: 1px;
     text-align: center;
     padding-top: 15px;
-
 }
 
 .row-poster {
+    flex-basis: 100%;
     width: 100%;
-    max-height: 85%;
+    max-height: 80%;
     object-fit: scale-down;
-    transition: transform 450ms;
+    transition: transform 360ms;
     overflow-y: hidden;
     overflow-x: scroll;
 }
@@ -32,10 +32,9 @@
     transform: scale(1.20);
 }
 
-.one_person {
-    border-color: white;
-}
-
+/*.one_person {*/
+/*    border-color: white;*/
+/*}*/
 
 .row-posters {
     display: flex;
@@ -45,17 +44,17 @@
     padding: 20px;
 }
 
-.row_posters::-webkit-scrollbar {
-    display: none;
-}
+/*.row_posters::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
 
-.row_poster {
-    object-fit: contain;
-    width: 100%;
-    max-height: 100%;
-    margin: 20px 20px 20px 20px;
-    transition: transform 450ms;
-}
+/*.row_poster {*/
+/*    object-fit: contain;*/
+/*    width: 100%;*/
+/*    max-height: 100%;*/
+/*    margin: 20px 20px 20px 20px;*/
+/*    transition: transform 450ms;*/
+/*}*/
 
 .row_poster:hover {
     transform: scale(1.12);
@@ -91,6 +90,53 @@
     object-fit: contain;
     width: 100%;
 }
+
+
+@media (min-width: 375px) {
+
+    .tile {
+        width: 195px;
+        height: 276px
+    }
+
+    .row-poster {
+        height: 75%;
+        contain: layout;
+    }
+}
+
+@media (min-width: 1240px) {
+
+    .tile {
+        padding-top: 5px;
+        width: 236px;
+        height: 335px;
+
+    }
+}
+
+@media (min-width: 1920px) {
+
+    .tile {
+        width: 275px;
+        height: 360px;
+        border: 30px;
+    }
+
+    .row-poster {
+        padding-top: 8px;
+        height: 75%;
+        contain: layout;
+    }
+}
+
+@media (max-device-width:  2560px) {
+
+    .tile{
+        border: 25px solid #00627C;
+    }
+}
+
 
 
 

@@ -1,21 +1,21 @@
-// noinspection JSCheckFunctionSignatures
-
 import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import styled from "./Registration.module.css"
-import validations from "../../helpers/fetchdata/validations";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import logo_loading from "../../helpers/assets/Animatie loading.gif"
+import {Tile} from "../../components/tile/Tile";
+import InputField from "../../components/inputfields/InputField";
+import {Button} from "../../components/button-link/Button-Link";
 
 function Registration() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [serverResponse, setServerResponse] = useState(null);
     const navigate = useNavigate();
     const admin = process.env.REACT_APP_ADMIN_PASSWORD;
     const {register, handleSubmit, watch, setValue, formState: {errors}} = useForm();
+
 
     const watchPassword = watch("password");
     useEffect(() => {
@@ -33,14 +33,14 @@ function Registration() {
     }, []);
 
     async function onSubmit(data) {
+
+        console.log(data);
+
         toggleError(false);
         toggleLoading(true);
 
         try {
-            console.log(data);
-            // use this axios await comment if you want to test all endpoints and wake the server
-            // const result = await NoviBackend.get(requests.get.test.endpoint); //
-
+            // const result = await NoviBackend.get(requests.get.test.endpoint, {
             const result = await NoviBackend.post(requests.post.signup, {
                     username: data.username,
                     email: data.email,
@@ -66,53 +66,93 @@ function Registration() {
 
     return (
         <>
-            <h1>Register</h1>
-            <form className={styled.form} onSubmit={handleSubmit(onSubmit)}>
+            <main className={styled["page-wrapper"]}>
+
+                <article className={styled.tiles}>
+
+                    <section className={styled["tile-signup"]}>
+                        <Tile
+                            title="Sign Up"
+                            id={styled["tile-signup"]}
+                        >
+                            <form className={styled.form} onSubmit={handleSubmit(onSubmit)}>
+                                <InputField
+                                    htmlFor="username-field"
+                                    id="username-field"
+                                    type="username"
+                                    name="username"
+                                    placeholder="Insert Username"
+                                    register={register}
+                                />
+                                <p>{errors?.username && errors.username?.message}</p>
+
+                                <InputField
+                                    htmlFor="email-field"
+                                    id="email-field"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Insert E-Mail"
+                                    register={register}
+                                />
+                                <p>{errors?.email && errors.email?.message}</p>
+
+                                <InputField
+                                    htmlFor="role-field"
+                                    id="role-field"
+                                    type="text"
+                                    name="role"
+                                    placeholder="role"
+                                    register={register}
+                                />
+                                <p>{errors?.role && errors.role?.message}</p>
+
+                                <InputField
+                                    htmlFor="password-field"
+                                    id="password-field"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Insert Password"
+                                    register={register}
+                                />
+                                <p>{errors?.password && errors.password?.message}</p>
+
+                                <Button
+                                    type="submit"
+                                    name="submit"/>
+                            </form>
+                        </Tile>
+                    </section>
+
+                    <section className={styled["tile-quote"]}>
+                        <Tile
+                            id={styled["tile-quote"]}
+                        >
+                            <div className={styled.quote}>
+                                <h2 className={styled["quote-line"]}>"You Had Me At Hello"</h2>
+                                <h4>- Jerry Maquire</h4>
+                                <h5>Renee Zelweger as Dorothy Boyd</h5>
+                            </div>
+                        </Tile>
+                    </section>
+
+                </article>
+
 
                 <section>
-                    <label htmlFor="username-field">Username
-                        <input id="username-field" type="text" {...register("username", validations.username)}/>
-                    </label>
-                    {errors?.username && errors?.username.message}
+                    <div hidden={loading === false}>
+                        <p hidden={loading === false}>Loading... please wait...</p>
+                        < img src={logo_loading} alt="logo-loading" width="75px"/>
+                    </div>
+                    {error &&
+                        <p className={styled.error}>Account already exist, Press F5 to try again with a different e-mail
+                            address, or go to <Link to="/login">Login</Link></p>}
                 </section>
 
-                <section>
-                    <label htmlFor="email-field">E-mail
-                        <input id="email-field" type="email" {...register("email", validations.email)} />
-                    </label>
-                    {errors?.email && errors?.email.message}
-                </section>
+                <p hidden={error || loading}>Do you already have an account? Go to <Link to="/login">Login</Link></p>
 
-                <section>
-                    <label htmlFor="password-field">Password
-                        <input id="password-field" type="password" {...register("password", validations.password)} />
 
-                    </label>
-                    {errors?.password && errors?.password.message}
-                </section>
-
-                <section>
-                    <label htmlFor="role-field">
-                        <input id="role-field" value={["user"]} hidden="hidden" {...register("role")} />
-                    </label>
-                </section>
-
-                <button type={"submit"} disabled={loading}>Registreer</button>
-            </form>
-
-            <section>
-                <div hidden={loading === false}>
-                    <p hidden={loading === false}>Loading... please wait...</p>
-                    < img src={logo_loading} alt="logo-loading" width="75px"/>
-                </div>
-                {error &&
-                    <p className={styled.error}>Account already exist, Press F5 to try again with a different e-mail
-                        address, or go to <Link to="/login">Login</Link></p>}
-            </section>
-
-            <p hidden={error || loading}>Do you already have an account? Go to <Link to="/login">Login</Link></p>
-
-            <Outlet/>
+                <Outlet/>
+            </main>
         </>
     )
 }

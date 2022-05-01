@@ -1,8 +1,10 @@
+
 body {
     margin: 0;
 }
 
 .app {
+    /*z-index: -2;*/
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -11,6 +13,10 @@ body {
 main {
     flex-grow: 1;
     background-color: #000000;
+}
+
+text {
+    margin-bottom: 1px;
 }
 
 .title {
@@ -28,7 +34,7 @@ main {
     background-color: #CD6D06;
 }
 
-.contact{
+.contact {
     background-color: #C89028;
     font-weight: bold;
     color: #00627C;
@@ -37,13 +43,13 @@ main {
     border-right-width: 12px;
     border-radius: 100px;
     padding: 2px 20px 2px 20px;
+    margin: 15px;
 }
 
 .sponsor {
     background-color: #00627C;
     text-align: center;
 }
-
 
 .logo-tmdb {
     border-left-width: 12px;
@@ -60,8 +66,36 @@ main {
     padding-bottom: 3px;
 }
 
-/*@media only screen and (min-width: 320px) and (max-width: 1024px) {*/
-/*    html, body {*/
-/*        position: relative;*/
-/*    }*/
-/*}*/
+
+@media (min-width: 375px) {
+
+    .title {
+        font-size: x-large;
+    }
+
+}
+
+@media (min-width: 1240px) {
+
+    .tile {
+        padding-top: 5px;
+        width: 236px;
+        height: 335px;
+
+    }
+}
+
+@media (min-width: 1920px) {
+
+    .tile {
+        width: 275px;
+        height: 360px;
+        border: 30px;
+    }
+
+    .row-poster {
+        padding-top: 8px;
+        height: 75%;
+        contain: layout;
+    }
+}
