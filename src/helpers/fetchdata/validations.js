@@ -29,8 +29,8 @@ const validations = {
     },
     role:{
         minLength: {
-            value: 4,
-            message: "Role must have at least 4 characters",
+            value: "user" || "admin",
+            message: "Role must be user or admin",
         }
     },
 

@@ -24,8 +24,8 @@
     max-height: 80%;
     object-fit: scale-down;
     transition: transform 360ms;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    /*overflow-y: hidden;*/
+    /*overflow-x: scroll;*/
 }
 
 .row-poster:hover {
@@ -44,9 +44,9 @@
     padding: 20px;
 }
 
-/*.row_posters::-webkit-scrollbar {*/
-/*    display: none;*/
-/*}*/
+.row-posters::-webkit-scrollbar {
+    display: none;
+}
 
 /*.row_poster {*/
 /*    object-fit: contain;*/
@@ -105,7 +105,7 @@
     }
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 1040px) {
 
     .tile {
         padding-top: 5px;

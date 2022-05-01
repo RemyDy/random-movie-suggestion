@@ -18,7 +18,7 @@ export const requests = {
         },
         movie: `search/movie?api_key=${myKey}&query=`,
     },
-    discover: `/discover/movie?api_key=${myKey}&language=en-US`,
+    discover: `/discover/movie?api_key=${myKey}&language=en-US&include_adult=false&page=1`,
     genre: {
         action: `&with_genres=28`,
         comedy: `&with_genres=35`,

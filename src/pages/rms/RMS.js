@@ -23,8 +23,6 @@ function RMS() {
     const [person, setPerson] = useState("")
     const [lookFor, setLookFor] = useState("");
     const [searchType, setSearchType] = useState(0);
-    const [movie, setMovie] = useState("");
-    const [personID, setPersonID] = useState("");
 
     function resetData() {
         reset({
@@ -60,12 +58,9 @@ function RMS() {
         } else if (rating) {
             setURL(rating);
             setSearchType(2)
-        } else if (person) {
-            setPerson(person)
-            setSearchType(1);
+
         } else if (movie) {
             setSearchType(3);
-            setMovie(movie)
         }
     }
 
@@ -84,16 +79,14 @@ function RMS() {
                 {url &&
                     <>
                         <p>Not in the mood for this movie ?</p>
-                        <Button type="button" name="search again"/>
-                        {/*<Button type="button" name="search again" onClick={() => setURL("") + resetData}/>*/}
+                        <Button type="button" name="search-again" onClick={() => setURL("") + resetData}/>
                     </>
                 }
 
                 {person &&
                     <>
                         <p>Not in the mood for this movie ?</p>
-                        <Button type="button" name="search again"/>
-                        {/*<Button type="button" name="search again" onClick={() => setPerson("") + resetData}/>*/}
+                        <Button type="button" name="search-again" onClick={() => setPerson("") + resetData}/>
                     </>
                 }
 
@@ -107,7 +100,6 @@ function RMS() {
                             >
                                 <label className={styled["select-field"]} htmlFor="suggestion-field">
                                     <select id="suggestion-field" onChange={handleChange}>
-                                        {/*<option placeholder="select">Movie by</option>*/}
                                         <option value="select-genre">Genre</option>
                                         <option value="select-rating">Rating</option>
                                         <option value="select-both">Genre & Rating</option>
@@ -115,9 +107,7 @@ function RMS() {
                                         <option value="select-movie">Movie</option>
                                     </select>
                                 </label>
-                                <Button type="submit" name="search"/>
                             </Tile>
-
                         </section>
                     }
                 </article>
@@ -195,6 +185,7 @@ function RMS() {
                             }
 
                             <section>
+                                <Button type="submit" name="search">search</Button>
                             </section>
                         </form>
                     }
@@ -215,19 +206,10 @@ function RMS() {
                             <Data
                                 fetchUrl={requests.discover + url}
                                 endpoint="person"
-                                // value={setPersonID}
                             />
                         }
                     </section>
 
-                    <section>
-                        {person &&
-                            <Data
-                                fetchUrl={requests.search.person.id + person}
-                                endpoint="person"
-                            />
-                        }
-                    </section>
                 </article>
 
             </article>

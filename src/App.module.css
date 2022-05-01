@@ -1,18 +1,34 @@
 
 body {
-    margin: 0;
+    margin: 0px;
+    background-color: #000000;
 }
 
-.app {
-    /*z-index: -2;*/
-    min-height: 100vh;
+.page-wrapper {
     display: flex;
+    width: 100%;
+    height: 100vh; /* We can assume that the container's height is hardcoded in this example, but the end solution should work even if this value is changed*/
+    border: 1px black;
+    justify-content: center;
     flex-direction: column;
 }
 
-main {
-    flex-grow: 1;
+.page-items {
+    box-sizing: border-box;
+    align-self: center;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+
+.content {
     background-color: #000000;
+    flex: 1;
+}
+
+.content::-webkit-scrollbar {
+    display: none;
 }
 
 text {
@@ -31,6 +47,7 @@ text {
     display: flex;
     flex-direction: column;
     justify-self: flex-end;
+    max-height: 100%;
     background-color: #CD6D06;
 }
 
@@ -67,7 +84,7 @@ text {
 }
 
 
-@media (min-width: 375px) {
+@media only screen and (min-width: 375px) {
 
     .title {
         font-size: x-large;
@@ -75,17 +92,31 @@ text {
 
 }
 
-@media (min-width: 1240px) {
+@media only screen and (min-width: 1240px) {
 
     .tile {
         padding-top: 5px;
         width: 236px;
         height: 335px;
-
     }
+
+    .content {
+        overflow-y: scroll;
+    }
+
 }
 
-@media (min-width: 1920px) {
+@media only screen and (min-width: 1240px) {
+
+    .tile {
+        padding-top: 5px;
+        width: 236px;
+        height: 335px;
+    }
+
+}
+
+@media only screen and (min-width: 1920px) {
 
     .tile {
         width: 275px;
@@ -98,4 +129,5 @@ text {
         height: 75%;
         contain: layout;
     }
+
 }

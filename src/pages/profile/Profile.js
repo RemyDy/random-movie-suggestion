@@ -3,6 +3,8 @@ import {AuthContext} from "../../context/Context";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import {Link, Outlet} from "react-router-dom";
+import {Button} from "../../components/button-link/Button-Link";
+import styled from "./Profile.module.css"
 import logo_loading from "../../helpers/assets/Animatie loading.gif";
 
 function Profile() {
@@ -68,6 +70,8 @@ function Profile() {
                 </section>
             </article>
 
+
+
             <article>
                 <section>
                     {Object.keys(profileData).length > 0 &&
@@ -83,18 +87,16 @@ function Profile() {
 
                 {Object.keys(profileData).length === 0 &&
                     <section>
-                        {/*<Button type="button" onClick={()=> fetchProfileData()} name="message from teacher" />*/}
-                        <button type="button" onClick={() => fetchProfileData()}>click</button>
+                        <Button type="button" onClick={()=> fetchProfileData()} name="message from teacher" />
                         <div hidden={loading === false}>
                             <p>Loading... please wait...</p>
                             <img src={logo_loading} alt="logo-loading" width="75px"/>
                         </div>
                     </section>}
-                <br/>
 
             </article>
 
-            <p>Terug naar <Link to="/">Home</Link></p>
+            <p className={styled.link}>Terug naar <Link to="/">Home</Link></p>
 
             <Outlet/>
         </>
