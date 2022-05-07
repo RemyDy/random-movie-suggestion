@@ -19,5 +19,15 @@ export function Tile({children, title, id}) {
     )
 }
 
+export function TileWhiteBG({children}){
+    return(
+        <article>
+            {children}
+        </article>
+    )
+}
+
+
+
 
 

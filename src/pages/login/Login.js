@@ -9,6 +9,7 @@ import logo_loading from "../../helpers/assets/Animatie loading.gif";
 import {Tile} from "../../components/tile/Tile";
 import InputField from "../../components/inputfields/InputField"
 import {Button} from "../../components/button-link/Button-Link";
+import {TileWithContent} from "../../components/tile/tile-with-content/TileWithContent";
 
 function Login() {
     const {login} = useContext(AuthContext);
@@ -52,6 +53,20 @@ function Login() {
     return (
         <>
             <main className={styled["page-wrapper"]}>
+
+                <TileWithContent>
+                        <form>
+                            <InputField
+                                htmlFor="username-field"
+                                id="username-field"
+                                type="username"
+                                name="username"
+                                placeholder="Insert Username"
+                                register={register}
+                            />
+                            <p>{errors?.username && errors.username?.message}</p>
+                        </form>
+                </TileWithContent>
 
                 <article className={styled.tiles}>
 

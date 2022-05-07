@@ -94,7 +94,7 @@ text {
 
 @media only screen and (min-width: 1240px) {
 
-    .tile {
+    .row-item {
         padding-top: 5px;
         width: 236px;
         height: 335px;
@@ -108,7 +108,7 @@ text {
 
 @media only screen and (min-width: 1240px) {
 
-    .tile {
+    .row-item {
         padding-top: 5px;
         width: 236px;
         height: 335px;
@@ -118,7 +118,7 @@ text {
 
 @media only screen and (min-width: 1920px) {
 
-    .tile {
+    .row-item {
         width: 275px;
         height: 360px;
         border: 30px;

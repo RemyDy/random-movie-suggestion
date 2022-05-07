@@ -1,24 +1,54 @@
 import axios from "axios";
 
 export const myKey = process.env.REACT_APP_API_KEY;
-
 export const tmdbBackend = axios.create({
-    baseURL: "https://api.themoviedb.org/3",
+    baseURL: "https://api.themoviedb.org/3/",
 });
 
 export const requests = {
-    nowPlaying: `/movie/now_playing?api_key=${myKey}&language=en-US&include_adult=false`,
-    trending: `/trending/all/week?api_key=${myKey}&language=en-US&include_adult=false`,
-    topRated: `/movie/top_rated?api_key=${myKey}&language=en-US&include_adult=false`,
-    search: {
-        person: {
-            id: `search/person?api_key=${myKey}&query=`,
-            //between id & credits needs to be a person's ID number
-            credits: `/movie_credits?api_key=${myKey}&language=en-US`,
-        },
-        movie: `search/movie?api_key=${myKey}&query=`,
+    movie: {
+        id: `movie/`, // insert id after the forward slash and combine include parameters
+        latest: `movie/latest?api_key=${myKey}&include_adult=false`,
+        nowPlaying: `movie/now_playing?api_key=${myKey}&include_adult=false`,
+        popular: `movie/popular?api_key=${myKey}&include_adult=false`,
+        topRated: `movie/top_rated?api_key=${myKey}&include_adult=false`,
+        upcoming: `movie/upcoming?api_key=${myKey}&include_adult=false`
     },
-    discover: `/discover/movie?api_key=${myKey}&language=en-US&include_adult=false&page=1`,
+    people: {
+        id: `person/`, // insert id after the forward slash and combine with myKey and include parameters
+        popular: `person/popular?api_key=${myKey}&include_adult=false`
+    },
+    trending: {
+        movie: {
+            day: `trending/movie/day?api_key=${myKey}&include_adult=false`,
+            week: `trending/movie/week?api_key=${myKey}&include_adult=false`,
+        },
+        person: {
+            day: `trending/person/day?api_key=${myKey}&include_adult=false`,
+            week: `trending/person/week?api_key=${myKey}&include_adult=false`,
+        },
+    }
+}
+
+export const search = {
+    movie: `search/movie?api_key=${myKey}&include_adult=false&query=`,
+    people: `search/person?api_key=${myKey}&include_adult=false&query=`,
+}
+
+export const discover = `discover/movie?api_key=${myKey}&include_adult=false&query=`
+
+export const include = {
+    apiKey: `?api_key=${myKey}`,
+    language: {
+        US: `&language=en-US`,
+        NL: `&language=nl-NL`,
+        ES: `&language=es-ES`,
+    },
+    Region: {
+        US: `&region=US`,
+        NL: `&region=NL`,
+        ES: `&region=ES`,
+    },
     genre: {
         action: `&with_genres=28`,
         comedy: `&with_genres=35`,
@@ -39,15 +69,29 @@ export const requests = {
         war: `&with_genres=10752`,
         western: `&with_genres=37`,
     },
+    rating: `&vote_average.gte=`,
+    cast: `&with_cast=`,
+    crew: `&with_crew=`,
+    runtimeGreaterThan: `&with_runtime.gte=`,
+    runtimeLesserThan: `&with_runtime.lte=`,
+    video: `include_video=true`,
+    releaseDateGreaterThan: `&release_date.gte=`,
+    releaseDateLesserThan: `&release_date.lte=`,
+}
+
+export const appendVideoAndImages = {
+    append: `&append_to_response=videos, images&include_image_language=en,null`
+}
+
+export const selectListRating = {
     ratingFrom0: `&sort_by=popularity.asc&vote_average.gte=0`,
     ratingFrom30: `&sort_by=popularity.asc&vote_average.gte=3`,
     ratingFrom50: `&sort_by=popularity.asc&vote_average.gte=5`,
     ratingFrom70: `&sort_by=popularity.asc&vote_average.gte=7`,
     ratingFrom90: `&sort_by=popularity.asc&vote_average.gte=9`,
-    adultNo: `&include_adult=false`,
 }
 
-export const movieImages = {
+export const tmdbImagesBaseUrl = {
     baseURL: "https://image.tmdb.org/t/p/",
 }
 
@@ -61,15 +105,10 @@ export const imageSize = {
     },
     logo: {
         width45: `w45`,
-        width92: `w92`,
-        width154: `w154`,
-        width185: `w185`,
         width300: `w300`,
         width500: `w500`,
     },
     poster: {
-        width92: `w92`,
-        width154: `w154`,
         width185: `w185`,
         width342: `w342`,
         width500: `w500`,

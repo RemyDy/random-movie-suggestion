@@ -1,4 +1,12 @@
 .tile {
+    background-color: #00627C;
+}
+
+.tile-white{
+    background-color: white;
+}
+
+.row-item {
     width: 250px;
     height: 250px;
     margin: 25px;

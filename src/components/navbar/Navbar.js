@@ -40,6 +40,7 @@ function Navbar() {
                 :
                 <div className={styled["public-links"]}>
                     <NavLink to="/" end>Home</NavLink>
+                    <NavLink to="test" end>Test</NavLink>
                     <NavLink to="login" end>Login</NavLink>
                 </div>
             }
