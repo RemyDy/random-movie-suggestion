@@ -1,3 +1,17 @@
-.loading{
-    width: 100px;
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.loading__text {
+    font-size: 5vmin;
+    align-self: center;
+}
+
+.loading__image {
+    width: 300px;
+    align-self: center;
+}
+
+

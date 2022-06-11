@@ -1,4 +1,48 @@
-.link {
-    margin-top: 30px;
 
+.main {
+    margin: 1.5em;
+    min-height: 100vh;
 }
+
+.intro {
+    text-align: center;
+    font-size: 2vmin;
+    margin: -1.2em 0 2em 0;
+}
+
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+    align-self: center;
+}
+
+.tiles__button {
+    display: flex;
+    justify-content: center;
+}
+
+.tiles__profile {
+    text-align: center;
+    width: 295px;
+}
+
+.loading {
+    text-align: center;
+    font-size: 4vmin;
+}
+
+.tiles__profile-secret {
+    text-decoration: none;
+}
+
+.tiles__button-secret {
+    align-self: center;
+    margin-bottom: 1em;
+}
+
+
+
+
+

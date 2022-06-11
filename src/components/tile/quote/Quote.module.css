@@ -1,0 +1,49 @@
+.quote {
+    background-color: var(--clr-white-100);
+    border: 30px solid var(--clr-blue-300);
+    max-width: 235px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.quote__line {
+    color: var(--clr-yellow-500);
+    margin: auto;
+    text-align: center;
+}
+
+.quote__line::before {
+    content: open-quote;
+    opacity: .7;
+}
+
+.quote__line::after {
+    content: close-quote;
+    opacity: .7;
+}
+
+.quote__movie-title {
+    color: var(--clr-blue-700);
+    margin-bottom: 0;
+}
+
+.quote__movie-actor {
+    margin-top: 0;
+    color: var(--clr-blue-700);
+    font-style: italic;
+}
+
+.quote__movie-title,
+.quote__movie-actor {
+    padding-right: 1rem;
+    text-align: end;
+}
+
+.quote__movie-title::before {
+    content: "- ";
+}
+
+
+

@@ -1,15 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
-import styled from "./Login.module.css"
+import styles from "./Login.module.css"
 import {AuthContext} from "../../context/Context";
 import {Outlet, Link} from "react-router-dom";
 import {NoviBackend, requests} from "../../helpers/fetchdata/novi";
 import {axiosCancelToken} from "../../helpers/fetchdata/cancelToken";
 import logo_loading from "../../helpers/assets/Animatie loading.gif";
-import {Tile} from "../../components/tile/Tile";
 import InputField from "../../components/inputfields/InputField"
 import {Button} from "../../components/button-link/Button-Link";
-import {TileWithContent} from "../../components/tile/tile-with-content/TileWithContent";
+import Form from "../../components/tile/form/Form";
+import Quote from "../../components/tile/quote/Quote";
 
 function Login() {
     const {login} = useContext(AuthContext);
@@ -52,10 +52,19 @@ function Login() {
 
     return (
         <>
-            <main className={styled["page-wrapper"]}>
+            <main className={styles.main}>
 
-                <TileWithContent>
-                        <form>
+                <article className={styles.intro}>
+                    <p hidden={error || loading}> Don't have an account yet ?<Link
+                        to="/registration"> Register</Link> first.
+                    </p>
+                </article>
+
+                <article className={styles.tiles}>
+                    <Form
+                        title={"Sign In"}
+                    >
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <InputField
                                 htmlFor="username-field"
                                 id="username-field"
@@ -65,80 +74,52 @@ function Login() {
                                 register={register}
                             />
                             <p>{errors?.username && errors.username?.message}</p>
-                        </form>
-                </TileWithContent>
 
-                <article className={styled.tiles}>
+                            <InputField
+                                htmlFor="password-field"
+                                id="password-field"
+                                type="password"
+                                name="password"
+                                placeholder="Insert Password"
+                                register={register}
+                            />
+                            <p>{errors?.password && errors.password?.message}</p>
 
-                    <section className={styled["tile-login"]}>
-                        <Tile
-                            title="Sign in"
-                            id={styled["tile-login"]}
-                        >
-                            <form className={styled.form} onSubmit={handleSubmit(onSubmit)}>
-                                <InputField
-                                    htmlFor="username-field"
-                                    id="username-field"
-                                    type="username"
-                                    name="username"
-                                    placeholder="Insert Username"
-                                    register={register}
-                                />
-                                <p>{errors?.username && errors.username?.message}</p>
-
-                                <InputField
-                                    htmlFor="password-field"
-                                    id="password-field"
-                                    type="password"
-                                    name="password"
-                                    placeholder="Insert Password"
-                                    register={register}
-                                />
-                                <p>{errors?.password && errors.password?.message}</p>
-
+                            <div className={styles.button}>
                                 <Button
                                     type="submit"
-                                    name="submit"/>
-                            </form>
-                        </Tile>
-                    </section>
-
-                    <section className={styled["tile-quote"]}>
-                        <Tile
-                            id={styled["tile-quote"]}
-                        >
-                            <div className={styled.quote}>
-                                <h2 className={styled["quote-line"]}>"There Is No Spoon"</h2>
-                                <h4>- The Matrix</h4>
-                                <h5>Rowan Witt as Spoon Boy</h5>
+                                    name="submit"
+                                />
                             </div>
-                        </Tile>
-                    </section>
+
+                        </form>
+                    </Form>
+
+                    <Quote
+                        line={"There Is No Spoon"}
+                        movie={"The Matrix"}
+                        actor={"Rowan Witt as Spoon Boy"}
+                    />
 
                 </article>
 
-                <section className={styled["text-register-first"]}>
+                <article className={styles.loading}>
                     <div hidden={loading === false}>
                         <p hidden={loading === false}>Loading... please wait...</p>
-                        < img src={logo_loading} alt="logo-loading" width="75px"/>
+                        <img src={logo_loading} alt="logo-loading" width="75px"/>
                     </div>
-                    {
-                        error &&
+
+                    {error &&
                         <p> Invalid username and/or password. Press F5 and try again, or <Link
                             to="/registration">register</Link> first.
                         </p>
                     }
-                    <p hidden={error || loading}> Don't have an account yet ?<Link
-                        to="/registration"> Register</Link> first.
-                    </p>
-                </section>
-
+                </article>
 
                 <Outlet/>
             </main>
         </>
-    )
-        ;
+    );
 }
 
 export default Login;

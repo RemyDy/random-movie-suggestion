@@ -1,66 +1,30 @@
 
-.page-wrapper {
-    margin: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
+.main {
+    margin: 1.5em;
+    min-height: 100vh;
+}
+
+.intro {
+    text-align: center;
+    font-size: 4vmin;
 }
 
 .tiles {
     display: flex;
-    flex-grow: 1;
-}
-
-#tile-login {
-    border: 35px solid #00627C
-}
-
-.text-register-first {
-    display: flex;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-}
-
-#tile-quote {
-    background-color: white;
-    border: 35px solid #00627C;
-}
-
-.quote {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
     align-self: center;
-    margin-top: 50px;
 }
 
-.quote-line {
-    color: #C89028;
-    font-weight: bold;
-    justify-content: space-evenly;
-    flex-grow: 1;
-
+.button {
+    display: flex;
+    justify-content: center;
 }
 
-h4 {
-    color: #05303D;
-    font-weight: bold;
-    align-self: flex-end;
-    margin-bottom: 0;
-}
-
-h5 {
-    margin-top: 3px;
-    color: #05303D;
-    font-weight: bold;
-    align-self: flex-end;
+.loading {
+    text-align: center;
+    font-size: 4vmin;
 }
 
 

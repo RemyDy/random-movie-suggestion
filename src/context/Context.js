@@ -1,9 +1,9 @@
-// import styled from "./Context.module.css"
+import styles from "./Context.module.css"
 import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import {NoviBackend, requests} from "../helpers/fetchdata/novi";
-// import animatie_loading from "../../src/helpers/assets/Animatie loading.gif"
+import animatie_loading from "../../src/helpers/assets/Animatie loading.gif"
 import isTokenValid from "../helpers/isTokenValid";
 
 export const AuthContext = createContext({});
@@ -14,19 +14,14 @@ function AuthContextProvider({children}) {
         user: null,
         status: "pending",
     });
-    const navigate = useNavigate();
+    let navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
 
         if (token && isTokenValid(token)) {
-            const decodedJWT = jwt_decode(token);
-            console.log("token is valid");
-            fetchUserData(decodedJWT.sub, token);
-        } else if (token && !isTokenValid(token)) {
-            console.log("token is not valid")
-            localStorage.clear();
-
+            const decoded = jwt_decode(token);
+            fetchUserData(decoded.sub, token);
         } else {
             toggleIsAuth({
                 isAuth: false,
@@ -36,12 +31,10 @@ function AuthContextProvider({children}) {
         }
     }, []);
 
-    function login(JWT)  {
-        if (JWT !== undefined) {
-            localStorage.setItem("token", JWT)
-        }
-        const decodedJWT = jwt_decode(JWT);
-        fetchUserData(decodedJWT.sub, JWT, "/profile");
+    function login(JWT) {
+        localStorage.setItem("token", JWT)
+        const decoded = jwt_decode(JWT);
+        fetchUserData(decoded.sub, JWT, "/profile");
     }
 
     function logout() {
@@ -55,9 +48,6 @@ function AuthContextProvider({children}) {
         navigate("/");
     }
 
-    // useEffect(()=>{}, [])
-    // useCallback(()=>{  }, [])
-
     async function fetchUserData(id, token, redirectUrl) {
 
         try {
@@ -68,25 +58,28 @@ function AuthContextProvider({children}) {
                 },
             });
 
-            if (result.status === 200) {
-                toggleIsAuth({
-                    ...isAuth,
-                    isAuth: true,
-                    user: {
-                        id: result.data?.id,
-                        username: result.data?.username,
-                        email: result.data?.email,
-                    },
-                    status: "done",
-                });
+            toggleIsAuth({
+                ...isAuth,
+                isAuth: true,
+                user: {
+                    username: result.data?.username,
+                    email: result.data.email,
+                    id: result.data.id,
+                },
+                status: "done",
+            });
 
-                if (redirectUrl) {
-                    navigate(redirectUrl);
-                }
+            if (redirectUrl) {
+                navigate(redirectUrl);
             }
+
         } catch (e) {
             console.error(e.response);
-            logout();
+            toggleIsAuth({
+                isAuth: false,
+                user: null,
+                status: "done",
+            });
         }
     }
 
@@ -99,7 +92,14 @@ function AuthContextProvider({children}) {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {isAuth.status === "done" ? children : <p>Loading...</p>}
+            {isAuth.status === "done" ? children : <>
+                <div className={styles.loading}><p className={styles["loading__text"]}>Loading...</p>
+                    <img className={styles["loading__image"]}
+                         src={animatie_loading}
+                         alt={"animation of movie clicker going up and down to emphasize loading of page"}
+                    />
+                </div>
+            </>}
         </AuthContext.Provider>
     );
 }

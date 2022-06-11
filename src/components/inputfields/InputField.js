@@ -1,24 +1,45 @@
-import styled from "./InputField.module.css"
-import validations from "../../helpers/fetchdata/validations";
+import styles from "./InputField.module.css"
+import React from "react";
 
-
-
-function InputField({type, register, name, label, placeholder, value, hidden}) {
+function InputField({register, name, value, hidden, validations, children, onchange}) {
     return (
-        <article className={styled.container}>
+        <article>
             <label
-                className={styled.label}
-                htmlFor={label}/>
-            <input className={styled.input}
-                   type={type}
-                   id={label}
+                htmlFor={`${name}-field`}/>
+            <input className={styles.input}
+                   type={name}
+                   id={`${name}-field`}
                    value={value}
-                   placeholder={placeholder}
+                   placeholder={`insert ${name}`}
                    hidden={hidden}
-                   {...register(name, validations.validate)}
+                   validations={validations}
+                   onChange={onchange}
+                   {...register(name, validations)}
             />
+            {children}
         </article>
     )
 }
+
+
+// }
+
+// function InputField({type, register, name, label, placeholder, value, hidden}) {
+//     return (
+//         <article className={styled.container}>
+//             <label
+//                 className={styled.label}
+//                 htmlFor={label}/>
+//             <input className={styled.input}
+//                    type={type}
+//                    id={label}
+//                    value={value}
+//                    placeholder={placeholder}
+//                    hidden={hidden}
+//                    {...register(name, validations.validate)}
+//             />
+//         </article>
+//     )
+// }
 
 export default InputField;

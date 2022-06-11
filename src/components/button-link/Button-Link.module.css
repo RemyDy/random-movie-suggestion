@@ -1,33 +1,17 @@
 .button {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-}
-
-.button {
     display: flex;
     flex-direction: column;
     outline: none;
-    background-color: #C89028;
-    padding: 10px;
-    border-radius: 100px;
-    color: #00627C;
+    background-color: var(--clr-yellow-500);
+    padding: 1em;
+    border: 0.0625em solid transparent;
+    border-radius: 1000em;
+    color: var(--clr-blue-700);
     align-self: center;
-    margin-top: 10px;
-    margin-bottom: -10px;
 }
 
 .button:hover {
     text-decoration: none;
-    font-weight: normal;
-    border: solid #f2f2f2;
-    color: #f2f2f2;
-}
-
-.link {
-
+    border: 0.0625em solid var(--clr-white-100);
+    color: var(--clr-white-100);
 }

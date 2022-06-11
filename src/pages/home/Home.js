@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import styled from "./Home.module.css"
+import styles from "./Home.module.css"
 import {requests} from "../../helpers/fetchdata/tmdb"
 import Data from "../../components/data/Data";
 import {Outlet} from "react-router-dom";
@@ -24,17 +24,19 @@ function Home() {
 
     return (
         <>
-            <article className={styled.article}>
-                <section>
-
-                    <div className={styled.text}>
-                        <h2 className={styled.title}>Top Trending Movies</h2>
-                        <p>Welcome to <abbr title="random movie suggester">RMS</abbr></p>
-                        <p>Don't know what to watch?</p>
-                        <p>Check out these top trending movies, perhaps you will see something you like</p>
-                        <p>Or you can login and search on genre or cast member</p>
-                        <p>Enjoy !</p>
-                    </div>
+            <article className={styles.home}>
+                <section className={styles.intro}>
+                    <header>
+                        <h1 className={styles.title}>Welcome to RMS !</h1>
+                    </header>
+                    <main className={styles.main}>
+                        <p><strong>Don't know what to watch?</strong></p>
+                        <p className={styles.paragraph}>check out these top trending movies
+                            <br/> perhaps you will see something you like
+                            <br/> if not you can login and search for movies
+                            <br/> enjoy your search !
+                        </p>
+                    </main>
 
                     {showBanner === true &&
                         <Data>
@@ -43,7 +45,7 @@ function Home() {
                         </Data>
                     }
 
-                    <Data className={styled.tile}
+                    <Data className={styles.tile}
                           fetchUrl={requests.trending.movie.week}
                           endpoint="rowMovies"
                           onclick={() => getRef()}
@@ -54,7 +56,8 @@ function Home() {
 
             <Outlet/>
         </>
-    );
+    )
+        ;
 }
 
 export default Home;

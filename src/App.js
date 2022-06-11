@@ -1,5 +1,4 @@
-import styled from './App.module.css';
-// import breakpoints from "./helpers/breakpoints";
+import styles from './App.module.css';
 import logoTMDB from "./helpers/assets/TMDB-logo.png"
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
@@ -18,45 +17,43 @@ function App() {
 
     return (
         <>
-            <article className={styled["page-wrapper"]}>
-                <section className={styled["page-items"]}>
+            <article className={styles["page-wrapper"]}>
 
-                    <header className={styled.header}>
+                    <header>
                         <Navbar/>
-                        <h1 className={styled.title}>Random Movie Suggester</h1>
+                        <h1 className={styles.title}>Random Movie Suggester</h1>
                     </header>
 
-                    <main className={styled.content}>
+                    <main className={styles.main}>
                         <Routes>
                             {isAuth ?
                                 <>
-                                    <Route path="/profile" element={<Profile/>}/>
-                                    <Route path="/rms" element={<RMS/>}/>
-                                    <Route path="/game" element={<Game/>}/>
+                                    <Route path="/profile/*" element={<Profile/>}/>
+                                    <Route path="/rms/*" element={<RMS/>}/>
+                                    <Route path="/game/*" element={<Game/>}/>
                                     <Route path="/" element={<Home/>}/>
                                 </>
                                 :
                                 <>
-                                    <Route path="/" element={<Home/>}/>
-                                    <Route path="/login" element={<Login/>}/>
-                                    <Route path="/registration" element={<Registration/>}/>
+                                    <Route path="/login/*" element={<Login/>}/>
+                                    <Route path="/registration/*" element={<Registration/>}/>
                                     <Route path="/test" element={<Test/>}/>
+                                    <Route index path="/" element={<Home/>}/>
                                 </>
                             }
                         </Routes>
                     </main>
 
-                    <footer className={styled.footer}>
-                        <div className={styled.sponsor}>
-                            <img className={styled["logo-tmdb"]} src={logoTMDB} alt="logo-tmdb" width="175px"/>
-                            <h5 className={styled.disclaimer}>
+                    <footer className={styles.footer}>
+                        <div className={styles.sponsor}>
+                            <img className={styles["logo-tmdb"]} src={logoTMDB} alt="logo-tmdb" />
+                            <h5 className={styles.disclaimer}>
                                 This product uses the TMDB API but is not endorsed or certified by TMDB
                             </h5>
                         </div>
-                        <p className={styled.contact}>Developed by: Remco, email: remco.schut@novi-education.nl</p>
+                        <p className={styles.contact}>Developed by: Remco, email: remco.schut@novi-education.nl</p>
                     </footer>
 
-                </section>
             </article>
         </>
     )

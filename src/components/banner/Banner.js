@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "./Banner.module.css"
+import styles from "./Banner.module.css"
 
 function Banner({children}) {
     return (
-        <article className={styled.banner}>
+        <article className={styles.banner}>
             {children}
         </article>
     )

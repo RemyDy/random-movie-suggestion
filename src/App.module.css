@@ -1,133 +1,95 @@
+:root {
+    --clr-black-900: #000000;
+    --clr-white-100: #FFFFFF;
+    --clr-grey-500: #505050;
+    --clr-yellow-500: #C89028;
+    --clr-orange-700: #CD6D06;
+    --clr-blue-300: #00627C;
+    --clr-blue-700: #05303D;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body{
+    min-height: 100vh;
+}
 
 body {
-    margin: 0px;
-    background-color: #000000;
-}
-
-.page-wrapper {
+    margin: 0;
+    background-color: var(--clr-black-900);
     display: flex;
-    width: 100%;
-    height: 100vh; /* We can assume that the container's height is hardcoded in this example, but the end solution should work even if this value is changed*/
-    border: 1px black;
-    justify-content: center;
     flex-direction: column;
+    /*min-height: 100vh;*/
 }
 
-.page-items {
-    box-sizing: border-box;
-    align-self: center;
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-    width: 100%;
-}
+/*.page-wrapper {*/
+/*    height: 100vmin;*/
+/*}*/
 
-.content {
-    background-color: #000000;
-    flex: 1;
-}
+/*.page-items {*/
+/*    display: flex;*/
+/*    flex-flow: column;*/
+/*    height: 100%;*/
+/*}*/
 
-.content::-webkit-scrollbar {
-    display: none;
-}
 
-text {
-    margin-bottom: 1px;
-}
 
 .title {
     margin: 0;
-    padding: 5px;
-    background-color: #00627C;
+    padding: 0.3125em;
+    background-color: var(--clr-blue-300);
     color: #C89028;
     text-align: center;
+    font-size: 4vmin;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    padding: 0 1%;
 }
 
 .footer {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
     justify-self: flex-end;
-    max-height: 100%;
     background-color: #CD6D06;
-}
-
-.contact {
-    background-color: #C89028;
-    font-weight: bold;
-    color: #00627C;
-    align-self: center;
-    border-left-width: 12px;
-    border-right-width: 12px;
-    border-radius: 100px;
-    padding: 2px 20px 2px 20px;
-    margin: 15px;
+    font-size: 0.5vmin;
+    margin-top: auto;
 }
 
 .sponsor {
     background-color: #00627C;
     text-align: center;
+    padding: 1em;
 }
 
 .logo-tmdb {
-    border-left-width: 12px;
-    border-right-width: 12px;
-    border-radius: 100px;
-    padding: 2px 20px 2px 20px;
-    margin-top: 10px;
+    border-radius: 1000px;
+    padding: 1em 3.5em;
+    margin: 0.5em;
     background-color: #000000;
+    width: 30vmin;
 }
 
 .disclaimer {
     margin: 0;
     color: black;
-    padding-bottom: 3px;
+    font-size: 2.2vmin;
 }
 
-
-@media only screen and (min-width: 375px) {
-
-    .title {
-        font-size: x-large;
-    }
-
-}
-
-@media only screen and (min-width: 1240px) {
-
-    .row-item {
-        padding-top: 5px;
-        width: 236px;
-        height: 335px;
-    }
-
-    .content {
-        overflow-y: scroll;
-    }
-
-}
-
-@media only screen and (min-width: 1240px) {
-
-    .row-item {
-        padding-top: 5px;
-        width: 236px;
-        height: 335px;
-    }
-
-}
-
-@media only screen and (min-width: 1920px) {
-
-    .row-item {
-        width: 275px;
-        height: 360px;
-        border: 30px;
-    }
-
-    .row-poster {
-        padding-top: 8px;
-        height: 75%;
-        contain: layout;
-    }
-
+.contact {
+    background-color: #C89028;
+    font-size: 2vmin;
+    font-weight: bold;
+    color: #00627C;
+    text-align: center;
+    border-radius: 1000px;
+    padding: 0.125em 1.25em;
+    margin: 0.5em 5em;
 }

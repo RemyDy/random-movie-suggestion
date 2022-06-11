@@ -1,0 +1,19 @@
+.tile {
+    background-color: var(--clr-blue-300);
+    max-width: 200px;
+    min-height: 150px;
+    border: 60px solid var(--clr-blue-300);
+
+}
+
+.title {
+    margin-top: auto;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+
+

@@ -1,32 +1,8 @@
 
-.container {
-    display: flex;
-    flex-direction: column;
-}
-
-.label {
-
-}
-
 .input {
-    border: white;
+    margin: 0;
+    border: none;
+    font-size: 1rem;
     text-align: center;
-    width: 200px;
-    color: black;
-}
-
-::-webkit-input-placeholder { /*edge*/
-    color: black;
-    justify-self: center;
-    text-align: center;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: black;
-    text-align: center;
-}
-
-::placeholder {
-    color: black;
-    text-align: center;
+    color: var(--clr-black-900);
 }

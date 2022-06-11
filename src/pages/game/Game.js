@@ -1,7 +1,8 @@
+import styles from "./Game.module.css"
 import {Button} from "../../components/button-link/Button-Link";
 import {myKey, tmdbBackend} from "../../helpers/fetchdata/tmdb";
 import {useState} from "react";
-import {Tile} from "../../components/tile/Tile";
+import Form from "../../components/tile/form/Form";
 
 
 // import {matchURL} from "../../helpers/regex";
@@ -27,16 +28,15 @@ function Game() {
 
     async function fetchMovies() {
 
-        // setMovie(movieArray[Math.floor(Math.random() * movieArray.length - 1)]);
-
         const nr = (Math.floor(Math.random() * 500));
-        console.log(nr);
 
         try {
             console.log(nr);
 
             const request = await tmdbBackend.get(`/discover/movie?api_key=${myKey}&language=en-US&include_adult=false&page=${nr}`);
             const results = request.data.results
+
+            console.log(results);
 
             const mapOnId = results.map((movie) => {
                 return movie.id;
@@ -64,29 +64,32 @@ function Game() {
 
     return (
         <>
-            <article>
-                <Button
-                    name="Start Game"
-                    type="button"
-                    onclick={() => fetchMovies()}
-                />
-            </article>
+            <main className={styles.main}>
+                <article>
+                    <Button
+                        name="Start Game"
+                        type="button"
+                        onclick={() => fetchMovies()}
+                    />
+                </article>
 
-            {Object.keys(movieOne).length > 0 &&
-                <>
-                    <Tile>
-                        <img src={movieOne.data} alt="movie backdrop" width="100px"/>
-                    </Tile>
+                {Object.keys(movieOne).length > 0 &&
+                    <>
+                        <Form>
+                            <img src={movieOne.data} alt="movie backdrop" width="100px"/>
+                        </Form>
 
-                    <Tile>
-                        <img src={movieTwo.data} alt="movie backdrop"/>
-                    </Tile>
+                        <Form>
+                            <img src={movieTwo.data} alt="movie backdrop"/>
+                        </Form>
 
-                    <Tile>
-                        <img src={movieTree.data} alt="movie backdrop"/>
-                    </Tile>
-                </>
-            }
+                        <Form>
+                            <img src={movieTree.data} alt="movie backdrop"/>
+                        </Form>
+                    </>
+                }
+
+            </main>
 
         </>
 

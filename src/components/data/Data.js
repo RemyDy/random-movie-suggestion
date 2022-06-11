@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
-import styled from "./Data.module.css"
+import styles from "./Data.module.css"
 import {tmdbBackend, tmdbImagesBaseUrl, imageSize} from "../../helpers/fetchdata/tmdb";
 import {matchURL} from "../../helpers/regex"
 import truncate from "../../helpers/truncate";
 import Iframe from "../iframe/Iframe";
 import Banner from "../banner/Banner"
-import {Tile} from "../tile/Tile";
 
 function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
     const [banner, setBanner] = useState({})
@@ -18,6 +17,9 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
     useEffect(() => {
 
         async function fetchData() {
+
+            console.log(fetchUrl);
+            console.log(endpoint);
 
             try {
                 const request = await tmdbBackend.get(fetchUrl);
@@ -40,24 +42,26 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
 
                         console.log(trailer.key)
                         setTrailerKey(trailer.key)
-
                         break;
+
                     case "oneItem":
                         console.log("oneItem");
                         const oneItemData = request.data;
                         setOneItem(oneItemData);
                         break;
-                    case "people":
-                        if (request.data.results) {
+
+                    case "person":
+                        if (request.data.results > 0) {
                             console.log("people");
                             const moreThanOnePersonData = request.data.results;
                             setPeople(moreThanOnePersonData);
                         } else {
                             console.log("person");
-                            const onePersonData = request.data;
+                            const onePersonData = request.data.results;
                             setPerson(onePersonData);
                         }
                         break;
+
                     default:
                         console.log("array of Movies")
                         const arrayOfItemsData = request.data.results;
@@ -91,7 +95,7 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
                     banner: <article>
                         <Banner>
                             <img
-                                className={styled["banner-image"]}
+                                className={styles["banner-image"]}
                                 key={banner?.id}
                                 id={trailerKey}
                                 src={`${tmdbImagesBaseUrl.baseURL}${imageSize.poster.width780}${banner?.backdrop_path}`}
@@ -99,15 +103,10 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
                                 onClick={onclick}
                             />
                             {trailerKey.length > 2 &&
-                                <Tile>
-                                    <Iframe
-                                        src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0`}
-                                    />
-                                </Tile>
+                                <Iframe
+                                    src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0`}
+                                />
                             }
-                            <Tile>
-
-                            </Tile>
                             <div>{banner?.name}</div>
                             {/*{children}*/}
                         </Banner>
@@ -115,7 +114,7 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
 
                     movie: <article>
                         {/*<div className={styled["data-row"]}>*/}
-                        <h3 className={styled.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h3>
+                        <h3 className={styles.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h3>
                         {/*<div className={styled["data-posters"]}>*/}
                         <img
                             key={oneItem?.id}
@@ -125,19 +124,19 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
                             onClick={onclick}
                         />
                         {/*</div>*/}
-                        <h4 className={styled["data_description"]}>{oneItem?.overview}</h4>
+                        <h4 className={styles["data_description"]}>{oneItem?.overview}</h4>
                         {/*</div>*/}
                         {children}
                     </article>,
 
-                    rowMovies: <article className={styled["row-container"]}>
+                    rowMovies: <article className={styles["row-container"]}>
                         {arrayOfItems.map((movie) => {
                             let title = movie?.title || movie?.name || movie?.original_title || movie?.original_name
                             let titleTruncated = truncate(title, 20);
-                            return <section className={styled["row-item"]} key={movie?.id}>
-                                <p className={styled.title}>{titleTruncated}</p>
+                            return <section className={styles["row-item"]} key={movie?.id}>
+                                <p className={styles.title}>{titleTruncated}</p>
                                 <img
-                                    className={styled["row-poster"]}
+                                    className={styles.poster}
                                     key={movie?.id}
                                     id={movie?.id}
                                     src={`${tmdbImagesBaseUrl.baseURL}${imageSize.poster.width500}${movie?.poster_path || movie?.backdrop_path}`}
@@ -149,26 +148,29 @@ function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
                         {children}
                     </article>,
 
-                    person: <article className={styled["one-person"]}>
+                    person: <article className={styles.person}>
                         <img
-                            className={`${styled["data-poster"]} ${isLargeTile && styled["data-posterLarge"]}`}
-                            key={person?.id}
+                            className={`${styles["poster"]}`}
+                            key={person[0]?.id}
+                            id={person[0]?.id}
                             src={`${tmdbImagesBaseUrl.baseURL}${imageSize.profile.width185}${person[0]?.profile_path}`}
-                            alt={person?.name}
+                            alt={person[0]?.name}
                             onClick={onclick}
                         />
-                        <section>Known for:</section>
-                        <p>{person[0]?.known_for[0].original_title}</p>
-                        <p>{person[0]?.known_for[1].original_title}</p>
-                        <p>{person[0]?.known_for[2].original_title}</p>
+                        <section className={styles["person__movies"]}>
+                            {person[0]?.name} is known for {person[0]?.known_for_department.toLocaleLowerCase()} and played in: <br/>
+                            - {person[0]?.known_for[0].original_title} <br/>
+                            - {person[0]?.known_for[1].original_title} <br/>
+                            - {person[0]?.known_for[2].original_title} <br/>
+                        </section>
                         {children}
                     </article>,
 
                     people: <article>
                         {people.map((person) => {
-                                return <section className={styled.rowItem} key={person?.id}>
+                                return <section className={styles.rowItem} key={person?.id}>
                                     <img
-                                        className={styled["row-poster"]}
+                                        className={styles["row-poster"]}
                                         key={person?.id}
                                         id={person?.id}
                                         src={`${tmdbImagesBaseUrl.baseURL}${imageSize.poster.width500}${person?.poster_path || person?.backdrop_path}`}
