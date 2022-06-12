@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Outlet} from "react-router-dom";
 import Data from "../../components/data/Data";
-import {discover, include, requests, search, selectListRating} from "../../helpers/fetchdata/tmdb"
+import {discover, andAdd, requests, search, selectListRating} from "../../helpers/fetchdata/tmdb"
 import {useForm} from "react-hook-form";
 import {Button} from "../../components/button-link/Button-Link";
 import Form from "../../components/tile/form/Form";
@@ -31,6 +31,10 @@ function RMS() {
         reset({
             data: ""
         });
+        setURL("");
+        setPerson("");
+        setLookFor("");
+        setSearchType(0);
     }
 
     function handleChange(event) {
@@ -75,16 +79,7 @@ function RMS() {
                         <>
                             <Button type="button"
                                     name="search-again"
-                                    onclick={() => resetData + setURL("") + setLookFor("") + setSearchType(0)}/>
-                        </>
-                    }
-
-                    {person &&
-                        <>
-                            <Button
-                                type="button"
-                                name="search-again"
-                                onclick={() => resetData + setPerson("") + setLookFor("") + setSearchType(0)}/>
+                                    onclick={resetData}/>
                         </>
                     }
                 </article>
@@ -128,27 +123,27 @@ function RMS() {
                                                         <label htmlFor="genre-field">
                                                             <select id="genre-field" {...register("genre")}>Genre
                                                                 <option value="">Choose Genre</option>
-                                                                <option value={include.genre.action}>Action</option>
-                                                                <option value={include.genre.adventure}>Adventure
+                                                                <option value={andAdd.genre.action}>Action</option>
+                                                                <option value={andAdd.genre.adventure}>Adventure
                                                                 </option>
-                                                                <option value={include.genre.animated}>Animated</option>
-                                                                <option value={include.genre.comedy}>Comedy</option>
-                                                                <option value={include.genre.crime}>Crime</option>
+                                                                <option value={andAdd.genre.animated}>Animated</option>
+                                                                <option value={andAdd.genre.comedy}>Comedy</option>
+                                                                <option value={andAdd.genre.crime}>Crime</option>
                                                                 <option
-                                                                    value={include.genre.documentaries}>Documentaries
+                                                                    value={andAdd.genre.documentaries}>Documentaries
                                                                 </option>
-                                                                <option value={include.genre.drama}>Drama</option>
-                                                                <option value={include.genre.family}>Family</option>
-                                                                <option value={include.genre.fantasy}>Fantasy</option>
-                                                                <option value={include.genre.history}>History</option>
-                                                                <option value={include.genre.horror}>Horror</option>
-                                                                <option value={include.genre.music}>Music</option>
-                                                                <option value={include.genre.mystery}>Mystery</option>
-                                                                <option value={include.genre.romance}>Romance</option>
-                                                                <option value={include.genre.scifi}>Sci fi</option>
-                                                                <option value={include.genre.thriller}>Thriller</option>
-                                                                <option value={include.genre.war}>War</option>
-                                                                <option value={include.genre.western}>Western</option>
+                                                                <option value={andAdd.genre.drama}>Drama</option>
+                                                                <option value={andAdd.genre.family}>Family</option>
+                                                                <option value={andAdd.genre.fantasy}>Fantasy</option>
+                                                                <option value={andAdd.genre.history}>History</option>
+                                                                <option value={andAdd.genre.horror}>Horror</option>
+                                                                <option value={andAdd.genre.music}>Music</option>
+                                                                <option value={andAdd.genre.mystery}>Mystery</option>
+                                                                <option value={andAdd.genre.romance}>Romance</option>
+                                                                <option value={andAdd.genre.scifi}>Sci fi</option>
+                                                                <option value={andAdd.genre.thriller}>Thriller</option>
+                                                                <option value={andAdd.genre.war}>War</option>
+                                                                <option value={andAdd.genre.western}>Western</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -158,7 +153,7 @@ function RMS() {
                                                     <section>
                                                         <label htmlFor="rating-field">
                                                             <select id="rating-field" {...register("rating")}>Rating
-                                                                <option>Choose Rating</option>
+                                                                {/*<option>Choose Rating</option>*/}
                                                                 <option value="">Choose Rating</option>
                                                                 <option value={selectListRating.ratingFrom90}>9 or
                                                                     better

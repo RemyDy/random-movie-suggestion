@@ -10,14 +10,6 @@ function Home() {
     const [movieId, setKey] = useState("")
     const dataRef = useRef()
 
-
-    // <header>
-    //     {/*<Data*/}
-    //     {/*    fetchUrl={requests.nowPlaying}*/}
-    //     {/*    endpoint="banner"*/}
-    //     {/*/>*/}
-    // </header>
-
     function getRef() {
         console.log(dataRef.current.getRef());
     }

@@ -21,25 +21,4 @@ function InputField({register, name, value, hidden, validations, children, oncha
     )
 }
 
-
-// }
-
-// function InputField({type, register, name, label, placeholder, value, hidden}) {
-//     return (
-//         <article className={styled.container}>
-//             <label
-//                 className={styled.label}
-//                 htmlFor={label}/>
-//             <input className={styled.input}
-//                    type={type}
-//                    id={label}
-//                    value={value}
-//                    placeholder={placeholder}
-//                    hidden={hidden}
-//                    {...register(name, validations.validate)}
-//             />
-//         </article>
-//     )
-// }
-
 export default InputField;

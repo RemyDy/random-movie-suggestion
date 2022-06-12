@@ -28,14 +28,14 @@ function App() {
                         <Routes>
                             {isAuth ?
                                 <>
-                                    <Route path="/profile/*" element={<Profile/>}/>
+                                    <Route index path="/profile/*" element={<Profile/>}/>
                                     <Route path="/rms/*" element={<RMS/>}/>
                                     <Route path="/game/*" element={<Game/>}/>
                                     <Route path="/" element={<Home/>}/>
                                 </>
                                 :
                                 <>
-                                    <Route path="/login/*" element={<Login/>}/>
+                                    <Route index path="/login/*" element={<Login/>}/>
                                     <Route path="/registration/*" element={<Registration/>}/>
                                     <Route path="/test" element={<Test/>}/>
                                     <Route index path="/" element={<Home/>}/>

@@ -6,7 +6,7 @@ import truncate from "../../helpers/truncate";
 import Iframe from "../iframe/Iframe";
 import Banner from "../banner/Banner"
 
-function Data({fetchUrl, isLargeTile, endpoint, onclick, children}) {
+function Data({fetchUrl, endpoint, onclick, children}) {
     const [banner, setBanner] = useState({})
     const [oneItem, setOneItem] = useState({});
     const [arrayOfItems, setArrayOfItems] = useState([]);

@@ -37,7 +37,7 @@ export const search = {
 
 export const discover = `discover/movie?api_key=${myKey}&include_adult=false&query=`
 
-export const include = {
+export const andAdd = {
     apiKey: `?api_key=${myKey}`,
     language: {
         US: `&language=en-US`,
@@ -69,6 +69,8 @@ export const include = {
         war: `&with_genres=10752`,
         western: `&with_genres=37`,
     },
+    page: `&page=`,
+    voteCount: `&vote_count.gte=`,
     rating: `&vote_average.gte=`,
     cast: `&with_cast=`,
     crew: `&with_crew=`,

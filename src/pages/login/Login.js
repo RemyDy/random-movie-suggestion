@@ -55,8 +55,8 @@ function Login() {
             <main className={styles.main}>
 
                 <article className={styles.intro}>
-                    <p hidden={error || loading}> Don't have an account yet ?<Link
-                        to="/registration"> Register</Link> first.
+                    <p hidden={error || loading}> Don't have an account yet? <Link
+                        to="/registration">Register</Link> first.
                     </p>
                 </article>
 
