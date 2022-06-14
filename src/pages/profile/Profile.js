@@ -60,9 +60,9 @@ function Profile() {
                         Ga dan naar <Link to="/Game">Game</Link>.
                     </p>
 
-                    {/*<p className={styles.link}>*/}
-                    {/*    Ga terug naar <Link to="/">Home</Link> om de trending films van dit moment te zien.*/}
-                    {/*</p>*/}
+                    <p className={styles.link}>
+                        Ga terug naar <Link to="/">Home</Link> om de trending films van dit moment te zien.
+                    </p>
                 </article>
 
                 <article className={styles.tiles}>

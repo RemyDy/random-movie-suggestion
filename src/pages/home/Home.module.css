@@ -1,5 +1,6 @@
 .home {
     margin-top: 1px;
+    min-height: 100vmin;
 }
 
 .intro {
@@ -20,6 +21,13 @@
     margin-top: -1.6em;
     font-size: 0.5rem;
 }
+
+.banner-button {
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+}
+
 
 @media only screen and (min-width: 1020px) {
 
@@ -49,6 +57,7 @@
     .paragraph {
         font-size: 1.4rem;
     }
+
 }
 
 @media only screen and (min-width: 2048px) {
@@ -79,5 +88,6 @@
     .paragraph {
         font-size: 3.5rem;
     }
+
 }
 

@@ -1,0 +1,40 @@
+iframe {
+    width: 500px;
+    height: 322px ;
+}
+
+@media screen and (max-width: 1024px) {
+
+    iframe {
+        width: 200px;
+        height: 133px ;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+    iframe {
+        width: 600px;
+        height: 400px ;
+    }
+
+}
+
+@media screen and (min-width: 2048px) {
+
+    iframe {
+        width: 1240px;
+        height: 826px ;
+    }
+
+}
+
+@media screen and (min-width: 3100px) {
+
+    iframe {
+        width: 2048px;
+        height: 1365px ;
+    }
+
+}

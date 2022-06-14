@@ -1,8 +1,14 @@
 .banner {
     display: flex;
-    width:  53%;
-    height: 50vh;
-    border: #00627C solid 25px;
-    margin: 10px 50px 10px 50px;
+    width: 90%;
+    margin: 10px 50px 100px 50px;
     padding: 25px;
+}
+
+@media screen and (min-width: 280px) {
+
+    .banner {
+        width: 60%;
+    }
+
 }

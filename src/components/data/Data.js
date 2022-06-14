@@ -31,7 +31,7 @@ function Data({fetchUrl, endpoint, onclick, children}) {
                         const bannerData = request.data;
                         setBanner(bannerData);
 
-                        const videos = bannerData.videos.results;
+                        const videos = bannerData?.videos.results;
                         console.log(videos)
                         const trailer = videos.find((video) => {
                             if (video.type === "Trailer" || video.type === "trailer") {
@@ -39,7 +39,6 @@ function Data({fetchUrl, endpoint, onclick, children}) {
                             }
                             return true;
                         });
-
                         console.log(trailer.key)
                         setTrailerKey(trailer.key)
                         break;
@@ -67,17 +66,8 @@ function Data({fetchUrl, endpoint, onclick, children}) {
                         const arrayOfItemsData = request.data.results;
                         setArrayOfItems(arrayOfItemsData);
                 }
-
-                // const results = request.data.results
                 const matchResult = request.config.url.match(matchURL);
-                // console.log(results);
                 console.log(matchResult[0]);
-
-                // if (matchResult[0] === "search/person") {
-                //     results.length > 1 ? setArrayOfItems(results) : setOneItem(results);
-                // }
-
-                // results.length > 1 ? setArrayOfItems(results) : setOneItem(results);
 
                 return request;
             } catch (e) {
@@ -92,30 +82,28 @@ function Data({fetchUrl, endpoint, onclick, children}) {
         <>
             {
                 {
-                    banner: <article>
+                    banner: <article className={styles.banner}>
+                        <h2>{banner?.title}</h2>
                         <Banner>
-                            <img
-                                className={styles["banner-image"]}
-                                key={banner?.id}
-                                id={trailerKey}
-                                src={`${tmdbImagesBaseUrl.baseURL}${imageSize.poster.width780}${banner?.backdrop_path}`}
-                                alt={banner?.name}
-                                onClick={onclick}
-                            />
-                            {trailerKey.length > 2 &&
-                                <Iframe
-                                    src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0`}
-                                />
-                            }
-                            <div>{banner?.name}</div>
-                            {/*{children}*/}
+                            <section className={styles["banner-content"]}>
+                                {trailerKey.length > 2 &&
+                                    <Iframe
+                                        src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0`}
+                                    />
+                                }
+                                <section className={styles["banner__info"]}>
+                                    <p className={styles["banner__info-runtime"]}>Runtime: {banner?.runtime}</p>
+                                    <p>overview: {banner?.overview}</p>
+                                </section>
+                                <section>
+                                    {children}
+                                </section>
+                            </section>
                         </Banner>
                     </article>,
 
                     movie: <article>
-                        {/*<div className={styled["data-row"]}>*/}
                         <h3 className={styles.title}>{oneItem?.title || oneItem?.name || oneItem?.original_title || oneItem?.original_name}</h3>
-                        {/*<div className={styled["data-posters"]}>*/}
                         <img
                             key={oneItem?.id}
                             id={oneItem?.id}
@@ -123,9 +111,7 @@ function Data({fetchUrl, endpoint, onclick, children}) {
                             alt={oneItem?.name}
                             onClick={onclick}
                         />
-                        {/*</div>*/}
                         <h4 className={styles["data_description"]}>{oneItem?.overview}</h4>
-                        {/*</div>*/}
                         {children}
                     </article>,
 
@@ -158,7 +144,8 @@ function Data({fetchUrl, endpoint, onclick, children}) {
                             onClick={onclick}
                         />
                         <section className={styles["person__movies"]}>
-                            {person[0]?.name} is known for {person[0]?.known_for_department.toLocaleLowerCase()} and played in: <br/>
+                            {person[0]?.name} is known for {person[0]?.known_for_department.toLocaleLowerCase()} and
+                            played in: <br/>
                             - {person[0]?.known_for[0].original_title} <br/>
                             - {person[0]?.known_for[1].original_title} <br/>
                             - {person[0]?.known_for[2].original_title} <br/>
