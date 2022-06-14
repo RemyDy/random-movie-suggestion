@@ -3,18 +3,12 @@ import {Button} from "../../components/button-link/Button-Link";
 import {
     andAdd,
     discover,
-    imageSize,
     myKey,
-    search,
     tmdbBackend,
-    tmdbImagesBaseUrl,
-    requests,
 } from "../../helpers/fetchdata/tmdb";
 import {useState} from "react";
-import Form from "../../components/tile/form/Form";
 import InputField from "../../components/inputfields/InputField";
 import {useForm} from "react-hook-form";
-import Data from "../../components/data/Data";
 
 function Game() {
 
@@ -26,8 +20,6 @@ function Game() {
 
     const [movieOne, setMovieOne] = useState({})
     const [resultGame, setResultGame] = useState(0);
-    const [movieTwo, setMovieTwo] = useState({})
-    const [movieTree, setMovieThree] = useState({})
 
     async function fetchMovies() {
 
@@ -36,7 +28,6 @@ function Game() {
         try {
             console.log(nr);
 
-            // const request = await tmdbBackend.get(`/discover/movie?api_key=${myKey}&language=en-US&include_adult=false&page=${nr}`);
             const request = await tmdbBackend.get(`${discover}${andAdd.voteCount}250${andAdd.page}${nr}`);
             const results = request.data.results
 
@@ -49,7 +40,6 @@ function Game() {
                 }
                 return movie.id
             });
-
 
             const threeId = mapOnId.slice(0, 3)
 
@@ -74,11 +64,6 @@ function Game() {
             list.push(resultTwo.data);
             list.push(resultThree.data);
 
-            //
-            setMovieOne(list[0])
-            setMovieTwo(list[1])
-            setMovieThree(list[2])
-
             return list;
         } catch (e) {
             console.error(e)
@@ -90,6 +75,7 @@ function Game() {
         let runtime = data.runtime;
         console.log(runtime);
 
+        // runtime type dient omgezet te worden door compiler daarom ==
         if (runtime == movieOne.runtime) {
             console.log("yes you won!")
             setResultGame(1);

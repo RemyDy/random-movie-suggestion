@@ -8,7 +8,6 @@ import Profile from "./pages/profile/Profile";
 import RMS from "./pages/rms/RMS"
 import Game from "./pages/game/Game"
 import {Routes, Route} from "react-router-dom";
-import Test from "./pages/test/Test"
 import React, {useContext} from "react";
 import {AuthContext} from "./context/Context";
 
@@ -37,7 +36,6 @@ function App() {
                                 <>
                                     <Route index path="/login/*" element={<Login/>}/>
                                     <Route path="/registration/*" element={<Registration/>}/>
-                                    <Route path="/test" element={<Test/>}/>
                                     <Route index path="/" element={<Home/>}/>
                                 </>
                             }

@@ -38,7 +38,6 @@ function Navbar() {
                     />
                     <div className={styles.links}>
                         <NavLink to="/" end>Home</NavLink>
-                        <NavLink to="test" end>Test</NavLink>
                         <NavLink to="login" end>Login</NavLink>
                     </div>
                 </article>

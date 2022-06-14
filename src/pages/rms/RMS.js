@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Outlet} from "react-router-dom";
 import Data from "../../components/data/Data";
-import {discover, andAdd, requests, search, selectListRating} from "../../helpers/fetchdata/tmdb"
+import {discover, andAdd, search, selectListRating} from "../../helpers/fetchdata/tmdb"
 import {useForm} from "react-hook-form";
 import {Button} from "../../components/button-link/Button-Link";
 import Form from "../../components/tile/form/Form";
@@ -219,16 +219,16 @@ function RMS() {
                     </>
                 }
 
-                <article>
-                    <section>
-                        {url && searchType === 1 &&
-                            <Data
-                                fetchUrl={search.people + url}
-                                endpoint="person"
-                            />
-                        }
-                    </section>
+                <section>
+                    {url && searchType === 1 &&
+                        <Data
+                            fetchUrl={search.people + url}
+                            endpoint="person"
+                        />
+                    }
+                </section>
 
+                <article>
                     <section>
                         {url && searchType === 2 &&
                             <Data
@@ -246,8 +246,8 @@ function RMS() {
                             />
                         }
                     </section>
-
                 </article>
+
 
             </main>
 

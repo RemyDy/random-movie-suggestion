@@ -10,6 +10,7 @@
     padding: 1.25em 1.5em 3em 1.5em;
     width: 15em;
     border: 1.25em solid var(--clr-blue-300);
+    text-align: center;
 }
 
 .title {
@@ -21,16 +22,31 @@
     border-radius: 0.625em;
     transition: transform 360ms;
     object-fit: contain;
-    /*overflow-y: hidden;*/
-    /*overflow-x: scroll;*/
 }
 
 .poster:hover {
     transform: scale(1.2);
 }
 
-.banner-image {
-    width: 55%;
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 2vmin;
+}
+
+.banner__info {
+    font-size: 0.7rem;
+}
+.banner__info-runtime{
+    font-size: 1.8rem;
 }
 
 .person {
@@ -100,10 +116,6 @@
     width: 100%;
 }
 
-.Iframe {
-    object-fit: cover;
-}
-
 @media only screen and (max-width: 375px) {
 
     .row-container {
@@ -118,6 +130,7 @@
     .poster {
         width: 12em;
     }
+
 }
 
 @media only screen and (min-width: 375px) {
@@ -141,6 +154,15 @@
     .row-item {
         font-size: 1.1vmin;
     }
+
+    .banner__info-runtime {
+        font-size: 3rem;
+    }
+
+    .banner__info {
+        font-size: 1.5rem;
+    }
+
 }
 
 @media only screen and (min-width: 2048px ) {
@@ -148,4 +170,26 @@
     .row-item {
         font-size: 1.6vmin;
     }
+
+    .banner__info-runtime {
+        font-size: 7rem;
+    }
+
+    .banner__info {
+        font-size: 4.5rem;
+    }
+
+}
+
+@media only screen and (min-width: 3100px ){
+
+    .banner__info-runtime {
+        font-size: 8rem;
+    }
+
+    .banner__info {
+        font-size: 5rem;
+    }
+
+
 }
