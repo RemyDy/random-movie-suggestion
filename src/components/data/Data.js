@@ -18,9 +18,6 @@ function Data({fetchUrl, endpoint, onclick, children}) {
 
         async function fetchData() {
 
-            console.log(fetchUrl);
-            console.log(endpoint);
-
             try {
                 const request = await tmdbBackend.get(fetchUrl);
                 console.log(request);
