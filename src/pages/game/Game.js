@@ -63,6 +63,8 @@ function Game() {
             list.push(resultOne.data);
             list.push(resultTwo.data);
             list.push(resultThree.data);
+            
+            setMovieOne(resultOne.data);
 
             return list;
         } catch (e) {
