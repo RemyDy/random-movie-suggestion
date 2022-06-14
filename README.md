@@ -4,6 +4,9 @@ Random Movie Suggester (RMS) biedt je de mogelijkheid om random film suggesties 
 Op de Home pagina kan je met een enkele klik op de knop een rij met films te zien krijgen die nu in bioscopen
 te zien zijn. 
 
+![Schermafbeelding 2022-06-14 033658](https://user-images.githubusercontent.com/89380231/173475063-71b037e3-16bb-41db-9453-50769d9d2dd9.png)
+![Schermafbeelding 2022-06-14 033505](https://user-images.githubusercontent.com/89380231/173475048-f374a8df-8c4e-4363-bbfc-64e76678774a.png)
+
 Wil je meer gericht zoeken, zoals op genre? 
 Log dan via de app in op de Novi backend en begeef je naar de private pagina's.
 
